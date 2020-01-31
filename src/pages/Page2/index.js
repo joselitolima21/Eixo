@@ -1,11 +1,52 @@
-import React from 'react'
+import React, {useState,useEffect} from 'react'
 import con from '../../controlers/controler'
 
 export default function Page2({ history }) {
 
+    const  [typeOfMaterial,setTypeOfMaterial] = useState('Aço')
+    const  [sigmaE,setSigmaE] = useState('')
+    const  [sigmaR,setSigmaR] = useState('')
+    const  [tempOfWork,setTempOfWork] = useState('')
+    const  [surfaceFinish,setSurfaceFinish] = useState('Retificado')
+    const  [conf,setConf] = useState('50%')
+
+    useEffect(()=>{
+
+      const typeOfMaterial = localStorage.getItem('typeOfMaterial')
+      const sigmaE = localStorage.getItem('sigmaE')
+      const sigmaR = localStorage.getItem('sigmaR')
+      const tempOfWork = localStorage.getItem('tempOfWork')
+      const surfaceFinish = localStorage.getItem('surfaceFinish')
+      const conf = localStorage.getItem('conf')
+      
+      if (typeOfMaterial){
+        setTypeOfMaterial(typeOfMaterial)
+      }
+      if(sigmaE) {
+        setSigmaE(sigmaE)
+      }
+      if(sigmaR) {
+        setSigmaR(sigmaR)
+      } 
+      if(tempOfWork) {
+        setTempOfWork(tempOfWork)
+      }
+      if(surfaceFinish) {
+        setSurfaceFinish(surfaceFinish)
+      } 
+      if(conf) {
+        setConf(conf)
+      }  
+    },[]) // eslint-disable-line 
+
     async function handleSubmitNext(event){
         event.preventDefault();
-        //localStorage.setItem('user',_id);
+        localStorage.setItem('typeOfMaterial',typeOfMaterial);
+        localStorage.setItem('sigmaE',sigmaE);
+        localStorage.setItem('sigmaR',sigmaR);
+        localStorage.setItem('tempOfWork',tempOfWork);
+        localStorage.setItem('surfaceFinish',surfaceFinish);
+        localStorage.setItem('conf',conf);
         history.push('/page3')
     }
 
@@ -26,17 +67,11 @@ export default function Page2({ history }) {
               <button class="btn btn-default">
                 <span class="icon icon-home"></span>
               </button>
-              <button class="btn btn-default">
-              <span class="icon icon-folder"></span>
+              <button class="btn btn-default active">
+              <span class="icon icon-menu"></span>
               </button>
               <button class="btn btn-default">
-                <span class="icon icon-cloud"></span>
-              </button>
-              <button class="btn btn-default">
-                <span class="icon icon-popup"></span>
-              </button>
-              <button class="btn btn-default">
-                <span class="icon icon-shuffle"></span>
+                <span class="icon icon-chart-line"></span>
               </button>
             </div>
 
@@ -61,16 +96,16 @@ export default function Page2({ history }) {
                 <nav class="nav-group">
                   <h5 class="nav-group-title">Dados de Entrada</h5>
                   <span class="nav-group-item">
-                  <span class="icon icon-check"></span>
+                  <span class="icon icon-stop"></span>
                     Valores importantes
                   </span>
                   <span class="nav-group-item active">
-                    <span class="icon icon-cancel"></span>
+                    <span class="icon icon-play"></span>
                       Material e acabamento
                     </span>
                   <span class="nav-group-item">
-                      <span class="icon icon-cancel"></span>
-                    Componentes
+                      <span class="icon icon-stop"></span>
+                      Componentes no eixo
                   </span>
                 </nav>
               </div>
@@ -79,7 +114,10 @@ export default function Page2({ history }) {
                   <form>
                       <div class="form-Edited">
                         <label class="label2" >Material do Eixo</label>
-                        <select class="form-control2">
+                        <select class="form-control2" 
+                        onChange ={event =>setTypeOfMaterial(event.target.value)}
+                        value = {typeOfMaterial}
+                        >
                           <option>Aço</option>
                           <option>Ferro</option>
                           <option>Cobre</option>
@@ -87,19 +125,31 @@ export default function Page2({ history }) {
                       </div>
                       <div class="form-Edited">
                         <label class="label2" >&sigma;e</label>
-                        <input type="number" class="form-control2" placeholder="MPa"/>
+                        <input type="number" class="form-control2" placeholder="MPa"
+                         onChange ={event =>setSigmaE(event.target.value)}
+                         value = {sigmaE}
+                         />
                       </div>
                       <div class="form-Edited">
                         <label class="label2" >&sigma;r</label>
-                        <input type="number" class="form-control2" placeholder="MPa"/>
+                        <input type="number" class="form-control2" placeholder="MPa"
+                        onChange ={event =>setSigmaR(event.target.value)}
+                        value = {sigmaR}
+                        />
                       </div>
                       <div class="form-Edited">
                         <label class="label2" >Temperatura de trabalho</label>
-                        <input type="number" class="form-control2" placeholder="°C"/>
+                        <input type="number" class="form-control2" placeholder="°C"
+                        onChange ={event =>setTempOfWork(event.target.value)}
+                        value = {tempOfWork}
+                        />
                       </div>
                       <div class="form-Edited">
                         <label class="label2" >Acabamento Superficial</label>
-                        <select class="form-control2">
+                        <select class="form-control2"
+                        onChange ={event =>setSurfaceFinish(event.target.value)}
+                        value = {surfaceFinish}
+                        >
                           <option>Retificado</option>
                           <option>Usinado ou estirado a frio</option>
                           <option>Laminado a quente</option>
@@ -108,7 +158,10 @@ export default function Page2({ history }) {
                       </div>
                       <div class="form-Edited">
                         <label class="label2" >Confiabilidade</label>
-                        <select class="form-control2">
+                        <select class="form-control2"
+                        onChange ={event =>setConf(event.target.value)}
+                        value = {conf}
+                        >
                           <option>50%</option>
                           <option>90%</option>
                           <option>95%</option>

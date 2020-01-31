@@ -18,7 +18,6 @@ function createWindow () {
     maxHeight: 600,
     webPreferences: {
       nodeIntegration: true,
-      preload: __dirname + '/preload.js'
     },
     frame: false
   })

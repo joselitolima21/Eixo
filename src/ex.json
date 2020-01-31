@@ -1,0 +1,23 @@
+{
+    "potency": 2,
+    "rotation": 1725,
+    "torque": 73.1,
+    "l": 8,
+    "r2": 5,
+    "components": {
+        "pulleys": [
+            { "d": 6, "position": 6.75}
+        ],
+        "gears": [
+            { "d": 6, "position": 2, "pressionAngle": 20}
+        ]
+    },
+    "sigmaR": 65,
+    "sigmaE": 38,
+    "typeOfMaterial": "steel",
+    "units": "im",
+    "tempOfWork": 60,
+    "surfaceFinish": "usinado",
+    "conf": 99,
+    "typeOfCarreg": "flexao"
+}
