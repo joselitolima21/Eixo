@@ -1,11 +1,13 @@
-const inputs = require('./ex.json')
-const math = require('math')
+import math from 'math'
 
-//Obtenção dos valores de Reações
+export default function (inputs){
+
+//Obtenção dos valores das Reações
 const T = inputs.torque
 const r2 = inputs.r2
 const pulleys = inputs.components.pulleys
 const gears = inputs.components.gears
+const l = inputs.l
 
 const forcesPulleys = pulleys.map((pulley)=>{
     const rp = pulley.d/2
@@ -49,11 +51,11 @@ const Cmy = forcesGears.reduce((prev,current)=>{
     return prev + current.Mg
 },0)
 
-R1x = -Cfx +Cmx/r2
-R2x = -Cmx/r2
+const R1x = -Cfx +Cmx/r2
+const R2x = -Cmx/r2
 
-R1y = -Cfy +Cmy/r2
-R2y = -Cmy/r2
+const R1y = -Cfy +Cmy/r2
+const R2y = -Cmy/r2
 
 
 //====================================================
@@ -79,20 +81,33 @@ const ListGearsY = forcesGears.map((gear)=>{
     return {f: gear.Fg,pos: gear.pos}
 })
 
-forcesX = [{f: R1x,pos: 0},{f: R2x,pos:r2}]
-forcesY = [{f: R1y,pos: 0},{f: R2y,pos:r2}]
+const forcesX = [{f: R1x,pos: 0},{f: R2x,pos:r2}]
+const forcesY = [{f: R1y,pos: 0},{f: R2y,pos:r2}]
 
-rex = forcesX.concat(ListPulleys).concat(ListGearsX)
-rey = forcesY.concat(ListGearsY)
+const rex = forcesX.concat(ListPulleys).concat(ListGearsX)
+const rey = forcesY.concat(ListGearsY)
 
-xz = rex.map((item)=>{
-    return sing(1,item.f,item.pos)
-}).reduce((prev,current) => prev + current,0)
+const range = (start,step, end) => {
+    const length = (end - start)/step + 1;
+    return Array.from({ length }, (_,i) => (start + step*i).toFixed(2));
+}
 
-yz = rey.map((item)=>{
-    return sing(1,item.f,item.pos)
-}).reduce((prev,current) => prev + current,0)
+const labels = range(0,0.2,l)
 
-res = (xz**2 + yz**2)**(1/2)
+const data = labels.map((z)=>{
 
-console.log(res)
+    const xz = rex.map((item)=>{
+        return sing(z,item.f,item.pos)
+    }).reduce((prev,current) => prev + current,0)
+
+    const yz = rey.map((item)=>{
+        return sing(z,item.f,item.pos)
+    }).reduce((prev,current) => prev + current,0)
+
+    const res = (xz**2 + yz**2)**(1/2)
+    return res.toFixed(4)
+})
+
+
+return [data,labels]
+}
