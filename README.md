@@ -5,9 +5,11 @@
 ## 1 - Fadiga
 - [x] Obter dados
 - [x] Gerar equações de momento
+- [ ] Calcular o q - Ver uma forma de perguntar
+- [ ] Calcular Kf e Kfs, utilizando os valores de Kt e Kts perguntados ou não
 - [ ] Calcular constantes
-- [ ] Calcular valor inicial
-- [ ] Calcular valor utilizando valores reais
+- [ ] Calcular o diâmetro
+- [ ] Ver como mostrar os resultados e possiveis gráficos
 ## 2 - Deflexão
 - [ ] Obter dados
 - [ ] Calcular deflexões torcionais 
