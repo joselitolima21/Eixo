@@ -3,6 +3,19 @@
   "version": "0.1.0",
   "main": "public/electron.js",
   "license": "MIT",
+  "description": "Aplicativo para dimensionamento de eixos de transmissão",
+  "author": "Joselito Lima",
+  "build": {
+    "appId": "com.eixo.app",
+    "files": [
+      "build/**/*",
+      "node_modules/**/*"
+    ],
+    "directories":{
+      "buildResources": "assets"
+    }
+  },
+  "homepage": "./",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
@@ -10,6 +23,7 @@
     "chart.js": "^2.9.3",
     "cross-env": "^7.0.0",
     "electron-is-dev": "^1.1.0",
+    "express": "^4.17.1",
     "math": "^0.0.3",
     "react": "^16.12.0",
     "react-chartjs-2": "^2.9.0",
@@ -20,11 +34,12 @@
   "scripts": {
     "react-start": "react-scripts start",
     "react-build": "react-scripts build",
-    "react-test": "react-scripts test",
+    "react-test": "react-scripts test --env=jsdom",
     "react-eject": "react-scripts eject",
     "electron-build": "electron-builder",
-    "build": "npm run react-build && npm run electron-build",
-    "start": "concurrently \"cross-env BROWSER=none npm run react-start\" \"wait-on http://localhost:3000/ && electron .\""
+    "release": "yarn react-build && electron-builder --publish=always",
+    "build": "yarn react-build && yarn electron-build",
+    "start": "concurrently \"cross-env BROWSER=none yarn react-start\" \"wait-on http://localhost:3000 && electron .\""
   },
   "eslintConfig": {
     "extends": "react-app"

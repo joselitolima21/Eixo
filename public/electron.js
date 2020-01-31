@@ -24,11 +24,11 @@ function createWindow () {
 
   // and load the index.html of the app.
   win.loadURL(
-    isDev ? "http://localhost:3000/" : `file://${path.join(__dirname,"..build/index.html")}`
+    isDev ? "http://localhost:3000/" : `file://${path.join(__dirname,"../build/index.html")}`
     )
 
   // Open the DevTools.
-  win.webContents.openDevTools()
+  //win.webContents.openDevTools()
 
   // Emitido quando a janela é fechada.
   win.on('closed', () => {
@@ -64,28 +64,3 @@ app.on('activate', () => {
 // Neste arquivo, você pode incluir o resto do seu aplicativo especifico do processo
 // principal. Você também pode colocar eles em arquivos separados e requeridos-as aqui.
 
-
-/*<div class="work">
-                <form>
-                    <div class="form-Edited">
-                      <label class="label2" >Potência transmitida</label>
-                      <input type="number" class="form-control2" placeholder="W">
-                    </div>
-                    <div class="form-Edited">
-                        <label class="label2" >Rotação</label>
-                        <input type="number" class="form-control2" placeholder="rpm">
-                    </div>
-                    <div class="form-Edited">
-                        <label class="label2" >Torque</label>
-                        <input type="number" class="form-control2" placeholder="N.m">
-                    </div>
-                    <div class="form-Edited">
-                        <label class="label2" >Comprimento do Eixo</label>
-                        <input type="number" class="form-control2" placeholder="mm">
-                    </div>
-                    <div class="form-actions">
-                      <button type="submit" class="btn btn-form btn-default">Cancel</button>
-                      <button type="submit" class="btn btn-form btn-primary">OK</button>
-                    </div>
-                  </form>
-            </div>*/

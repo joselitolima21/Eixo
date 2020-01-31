@@ -4,7 +4,7 @@
 3. Vibração
 ## 1 - Fadiga
 - [x] Obter dados
-- [ ] Gerar equações de momento
+- [x] Gerar equações de momento
 - [ ] Calcular constantes
 - [ ] Calcular valor inicial
 - [ ] Calcular valor utilizando valores reais

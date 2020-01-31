@@ -7,6 +7,18 @@ export default function Graph({ history }) {
 
   const [data,setData] = useState([])
   const [labels,setLabels] = useState([])
+  const [numPoints,setNumPoints] = useState(1)
+
+  const [P1,setP1] = useState('')
+  const [P2,setP2] = useState('')
+  const [P3,setP3] = useState('')
+  const [P4,setP4] = useState('')
+  const [P5,setP5] = useState('')
+  const [P6,setP6] = useState('')
+  const [P7,setP7] = useState('')
+
+
+  
 
   useEffect(()=>{
     const file = localStorage.getItem('file')
@@ -47,6 +59,20 @@ export default function Graph({ history }) {
         history.push('/')
     }
 
+    async function handlePlusPoints(){
+      const n = numPoints + 1
+      if (n<=7){
+        setNumPoints(n)
+      }
+    }
+    async function handleMinusPoints(){
+      const n = numPoints - 1
+      if (n>=1){
+        setNumPoints(n)
+      }
+    }
+
+
     return (
         <>
         <div class="window">
@@ -80,14 +106,84 @@ export default function Graph({ history }) {
           </div>
           </div>
           </header>
+              <div class="graph">
+              <Line data={dataSet} />
+              </div>
+              <label class="label5" >Observando o gráfico e de acordo com a disposição dos componentes no eixo,
+              escolha pontos que você deseja saber o diâmetro, por exemplo, 
+              se o <br/> pico do gráfico de momento for em 5 metros e você deseja saber o diâmetro nesse ponto 
+              coloque 5 no campo abaixo </label>
+              <div className="teste">
+              <form>
+                  <div class="form-Edited">
+                    <label class="label7">Posições de interesse</label>
+                    <button class="btn btn-default" onClick = {()=> handleMinusPoints()}  >
+                    <span class="icon icon-minus-circled"></span>
+                    </button>
+                    
+                    <button class="btn btn-default" onClick = {()=> handlePlusPoints()}  >
+                    <span class="icon icon-plus-circled"></span>
+                    </button>
 
-          <div class="window-content">
-            <div class="pane-group">
-            <div class="work">
-            <Line data={dataSet} />
-          </div>
-        </div>
-        </div>
+                    <>
+                    <label class="label6" >P1</label>
+                    <input id ="potency" type="number" class="form-control4" placeholder="mm" 
+                    onChange ={event =>setP1(event.target.value)}
+                    value = {P1}
+                    />
+                    </>
+                    { numPoints>=2 && (
+                    <>
+                    <label class="label6" >P2</label>
+                    <input id ="potency" type="number" class="form-control4" placeholder="mm" 
+                    onChange ={event =>setP2(event.target.value)}
+                    value = {P2}
+                    />
+                    </>)}
+                    { numPoints>=3 && (
+                    <>
+                    <label class="label6" >P3</label>
+                    <input id ="potency" type="number" class="form-control4" placeholder="mm" 
+                    onChange ={event =>setP3(event.target.value)}
+                    value = {P3}
+                    />
+                    </>)}
+                    { numPoints>=4 && (
+                    <>
+                    <label class="label6" >P4</label>
+                    <input id ="potency" type="number" class="form-control4" placeholder="mm" 
+                    onChange ={event =>setP4(event.target.value)}
+                    value = {P4}
+                    />
+                    </>)}
+                    { numPoints>=5 && (
+                    <>
+                    <label class="label6" >P5</label>
+                    <input id ="potency" type="number" class="form-control4" placeholder="mm" 
+                    onChange ={event =>setP5(event.target.value)}
+                    value = {P5}
+                    />
+                    </>)}
+                    { numPoints>=6 && (
+                    <>
+                    <label class="label6" >P6</label>
+                    <input id ="potency" type="number" class="form-control4" placeholder="mm" 
+                    onChange ={event =>setP6(event.target.value)}
+                    value = {P6}
+                    />
+                    </>)}
+                    { numPoints>=7 && (
+                    <>
+                    <label class="label6" >P7</label>
+                    <input id ="potency" type="number" class="form-control4" placeholder="mm" 
+                    onChange ={event =>setP7(event.target.value)}
+                    value = {P7}
+                    />
+                    </>)}
+                  </div>
+              </form>
+              </div>
+        
         <footer class="toolbar toolbar-footer">
             
           </footer>
