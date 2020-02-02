@@ -109,13 +109,12 @@ export default function Page3({ history }) {
             localStorage.removeItem('dg')
             localStorage.removeItem('pressionAngle')
             localStorage.removeItem('posG')
-
+            history.push('/graph')
           } else {
             setAtention(true)
           }
         }
       validate()
-      history.push('/graph')
   }
     
     return (
@@ -228,7 +227,7 @@ export default function Page3({ history }) {
 
               <button type= "submit" class="btn btn-primary pull-right" 
               onClick={handleSubmitNext}>
-                Gerar
+                Próximo
               </button>
         
             </div>

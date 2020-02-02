@@ -42,6 +42,9 @@ export default function Page1({ history }) {
         localStorage.setItem('r2',r2);
         history.push('/page2')
     }
+    async function handleHome(){
+      history.push('/')
+    }  
 
     return (
         <>
@@ -51,7 +54,7 @@ export default function Page1({ history }) {
           <div class="toolbar-actions">
 
             <div class="btn-group">
-              <button class="btn btn-default">
+              <button class="btn btn-default" onClick={handleHome}>
                 <span class="icon icon-home"></span>
               </button>
               <button class="btn btn-default active">

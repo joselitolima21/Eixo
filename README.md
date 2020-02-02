@@ -2,6 +2,16 @@
 1. Fadiga
 2. Deflexão
 3. Vibração
+## 0 - Programa
+- [x] Adicionar pontos no arquivo file
+- [x] Requisitos para passar de página
+- [x] Criar tela de entrada
+- [ ] Criar tela de resultados e algoritmo
+- [ ] Fazer option 2 ir para os resultados
+======== PARA AJUSTAR  ====================
+- [ ] Na option2 tratar quando não tiver arquivo 
+- [ ] Colocar janela que se sair perderá tudo page1, graph e resultados
+- [ ] Melhorar tela de entrada
 ## 1 - Fadiga
 - [x] Obter dados
 - [x] Gerar equações de momento

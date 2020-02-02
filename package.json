@@ -11,7 +11,7 @@
       "build/**/*",
       "node_modules/**/*"
     ],
-    "directories":{
+    "directories": {
       "buildResources": "assets"
     }
   },
@@ -59,6 +59,7 @@
   "devDependencies": {
     "concurrently": "^5.1.0",
     "electron": "^7.1.11",
-    "electron-builder": "^22.3.2"
+    "electron-builder": "^22.3.2",
+    "electron-rebuild": "^1.10.0"
   }
 }

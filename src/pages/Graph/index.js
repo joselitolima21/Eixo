@@ -1,6 +1,7 @@
 import React ,{useState,useEffect} from 'react'
 import con from '../../controlers/controler'
 import calc from '../../operations/calc'
+import db from '../../controlers/databaseJSON'
 import { Line } from 'react-chartjs-2'
 
 export default function Graph({ history }) {
@@ -15,10 +16,8 @@ export default function Graph({ history }) {
   const [P4,setP4] = useState('')
   const [P5,setP5] = useState('')
   const [P6,setP6] = useState('')
-  const [P7,setP7] = useState('')
 
-
-  
+  const [alert,setAlert] = useState(false)
 
   useEffect(()=>{
     const file = localStorage.getItem('file')
@@ -54,21 +53,48 @@ export default function Graph({ history }) {
         }
       ]
     };
-    async function handleDefault(event){
-        event.preventDefault();
-        history.push('/')
-    }
+
+    //async function handleHome(event){
+    //  event.preventDefault();
+    // history.push('/')
+    //}
 
     async function handlePlusPoints(){
       const n = numPoints + 1
-      if (n<=7){
+      if (n<=6){
         setNumPoints(n)
       }
     }
     async function handleMinusPoints(){
       const n = numPoints - 1
       if (n>=1){
-        setNumPoints(n)
+        if(numPoints === 6){
+          setP6('')
+        } else if (numPoints === 5){
+          setP5('')
+        } else if (numPoints === 4){
+          setP4('')
+        } else if (numPoints === 3){
+          setP3('')
+        } else if (numPoints === 2){
+          setP2('')
+        } else if (numPoints === 1){
+          setP1('')
+        }
+      setNumPoints(n)
+      }
+    }
+    function handleSubmitNext(){
+      const allPoints = [P1,P2,P3,P4,P5,P6]
+      const points = allPoints.filter((point)=>(point === '' ? false : true))
+      if(points[0]){
+        var infos = JSON.parse(localStorage.getItem('file'))
+        infos.points = points
+        localStorage.setItem('file',JSON.stringify(infos))
+        const fileName = localStorage.getItem('fileName')
+        db.save(fileName,infos)
+      } else {
+        setAlert(true)
       }
     }
 
@@ -84,7 +110,7 @@ export default function Graph({ history }) {
               <button class="btn btn-default">
                 <span class="icon icon-home"></span>
               </button>
-              <button class="btn btn-default" onClick={handleDefault}>
+              <button class="btn btn-default">
               <span class="icon icon-menu"></span>
               </button>
               <button class="btn btn-default active">
@@ -106,10 +132,10 @@ export default function Graph({ history }) {
           </div>
           </div>
           </header>
-              <div class="graph">
-              <Line data={dataSet} />
+              <div className="graph">
+              <Line className="graph" data={dataSet} />
               </div>
-              <label class="label5" >Observando o gráfico e de acordo com a disposição dos componentes no eixo,
+              <label className="label5" >Observando o gráfico e de acordo com a disposição dos componentes no eixo,
               escolha pontos que você deseja saber o diâmetro, por exemplo, 
               se o <br/> pico do gráfico de momento for em 5 metros e você deseja saber o diâmetro nesse ponto 
               coloque 5 no campo abaixo </label>
@@ -128,7 +154,7 @@ export default function Graph({ history }) {
                     <>
                     <label class="label6" >P1</label>
                     <input id ="potency" type="number" class="form-control4" placeholder="mm" 
-                    onChange ={event =>setP1(event.target.value)}
+                    onChange ={event =>{setP1(event.target.value);setAlert(false)}}
                     value = {P1}
                     />
                     </>
@@ -136,7 +162,7 @@ export default function Graph({ history }) {
                     <>
                     <label class="label6" >P2</label>
                     <input id ="potency" type="number" class="form-control4" placeholder="mm" 
-                    onChange ={event =>setP2(event.target.value)}
+                    onChange ={event =>{setP2(event.target.value);setAlert(false)}}
                     value = {P2}
                     />
                     </>)}
@@ -144,7 +170,7 @@ export default function Graph({ history }) {
                     <>
                     <label class="label6" >P3</label>
                     <input id ="potency" type="number" class="form-control4" placeholder="mm" 
-                    onChange ={event =>setP3(event.target.value)}
+                    onChange ={event =>{setP3(event.target.value);setAlert(false)}}
                     value = {P3}
                     />
                     </>)}
@@ -152,7 +178,7 @@ export default function Graph({ history }) {
                     <>
                     <label class="label6" >P4</label>
                     <input id ="potency" type="number" class="form-control4" placeholder="mm" 
-                    onChange ={event =>setP4(event.target.value)}
+                    onChange ={event =>{setP4(event.target.value);setAlert(false)}}
                     value = {P4}
                     />
                     </>)}
@@ -160,7 +186,7 @@ export default function Graph({ history }) {
                     <>
                     <label class="label6" >P5</label>
                     <input id ="potency" type="number" class="form-control4" placeholder="mm" 
-                    onChange ={event =>setP5(event.target.value)}
+                    onChange ={event =>{setP5(event.target.value);setAlert(false)}}
                     value = {P5}
                     />
                     </>)}
@@ -168,16 +194,8 @@ export default function Graph({ history }) {
                     <>
                     <label class="label6" >P6</label>
                     <input id ="potency" type="number" class="form-control4" placeholder="mm" 
-                    onChange ={event =>setP6(event.target.value)}
+                    onChange ={event =>{setP6(event.target.value);setAlert(false)}}
                     value = {P6}
-                    />
-                    </>)}
-                    { numPoints>=7 && (
-                    <>
-                    <label class="label6" >P7</label>
-                    <input id ="potency" type="number" class="form-control4" placeholder="mm" 
-                    onChange ={event =>setP7(event.target.value)}
-                    value = {P7}
                     />
                     </>)}
                   </div>
@@ -185,8 +203,20 @@ export default function Graph({ history }) {
               </div>
         
         <footer class="toolbar toolbar-footer">
+          <div class="toolbar-actions1">
+        
+            <button type= "submit" class="btn btn-default">
+              Voltar
+            </button>
             
-          </footer>
+            {alert && <label className="label9" >Adicione pelo menos um valor.</label>}
+
+            <button type= "submit" class="btn btn-primary pull-right" onClick={handleSubmitNext}>
+              Próximo
+            </button>
+
+          </div>
+        </footer>
         </div>
 </>
     )

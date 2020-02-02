@@ -53,8 +53,12 @@ export default function Page2({ history }) {
     async function handleSubmitBack(event){
       event.preventDefault();
       //localStorage.setItem('user',_id);
+      history.push('/page1')
+    }
+
+    async function handleHome(){
       history.push('/')
-  }
+    }  
 
     return (
         <>
@@ -64,7 +68,7 @@ export default function Page2({ history }) {
           <div class="toolbar-actions">
 
             <div class="btn-group">
-              <button class="btn btn-default">
+              <button class="btn btn-default" onClick={handleHome}>
                 <span class="icon icon-home"></span>
               </button>
               <button class="btn btn-default active">

@@ -104,7 +104,6 @@ text-decoration:none;
     min-height: 25px;
     min-width: 150px;
     font-size: 12px;
-    margin-bottom: 5px;
     font-weight: bold;
     white-space: nowrap;
     overflow: hidden;
@@ -118,8 +117,9 @@ text-decoration:none;
 }
 
 .form-control4 {
-    width: 60px;
-    margin-top: 8px;
+    width: 70px;
+    margin-top: 6px;
+    height: 10px;
     min-height: 25px;
     padding: 5px 10px;
     font-size: 13px;
@@ -158,4 +158,152 @@ text-decoration:none;
     overflow: hidden;
     text-overflow: ellipsis;
     color: rgb(0,0,0)
+}
+.home {
+    width: 30%;
+}
+.back {
+    width: 70%;
+    height: 100%;
+}
+
+.form-next {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-control5 {
+    width: 220px;
+    min-height: 25px;
+    margin-top: 10px;
+    padding: 5px 10px;
+    font-size: 13px;
+    line-height: 1.6;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    outline: none;
+}
+
+.radio {
+    margin-left: 10px;
+}
+
+.botaoNext {
+    width: 100px;
+    display: inline-block;
+    padding: 3px 8px;
+    margin-bottom: 0;
+    font-size: 12px;
+    line-height: 1.4;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: default;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.06);
+    -webkit-app-region: no-drag;
+    color: #333;
+    border-top-color: #c2c0c2;
+    border-right-color: #c2c0c2;
+    border-bottom-color: #a19fa1;
+    border-left-color: #c2c0c2;
+    background-color: #fcfcfc;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #fcfcfc), color-stop(100%, #f1f1f1));
+    background-image: -webkit-linear-gradient(top, #fcfcfc 0%, #f1f1f1 100%);
+    background-image: linear-gradient(to bottom, #fcfcfc 0%, #f1f1f1 100%);
+  }
+
+  .botaoBack {
+    width: 100px;
+    display: inline-block;
+    padding: 3px 8px;
+    margin-bottom: 0;
+    font-size: 12px;
+    line-height: 1.4;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: default;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.06);
+    -webkit-app-region: no-drag;
+    color: #fff; 
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    border-color: #388df8;
+    border-bottom-color: #0866dc;
+    background-color: #6eb4f7;
+    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #6eb4f7), color-stop(100%, #1a82fb));
+    background-image: -webkit-linear-gradient(top, #6eb4f7 0%, #1a82fb 100%);
+    background-image: linear-gradient(to bottom, #6eb4f7 0%, #1a82fb 100%);
+
+  }
+  .buttons {
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-bottom: 10px;
+    margin-right: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .buttons1 {
+    margin-left: 20px;
+    margin-bottom: 10px;
+    margin-right: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .label8 {
+    align-self: center;
+    vertical-align: middle;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    min-height: 25px;
+    min-width: 150px;
+    font-size: 13px;
+    margin-bottom: 5px;
+    margin-top: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    color: #FF0626;
+    font-weight: bold;
+    text-overflow: ellipsis;
+}
+
+.teste {
+   height: 40px;
+}
+
+.toolbar-actions1 {
+    margin-top: 4px;
+    margin-bottom: 3px;
+    padding-right: 3px;
+    padding-left: 3px;
+    padding-bottom: 3px;
+    display: flex;
+    justify-content: space-between;
+    -webkit-app-region: drag;
+}
+
+.label9 {
+    align-self: center;
+    vertical-align: middle;
+    display: flex;
+    justify-content: center;
+    font-size: 13px;
+    white-space: nowrap;
+    overflow: hidden;
+    color: #FF0626;
+    font-weight: bold;
+    text-overflow: ellipsis;
 }
