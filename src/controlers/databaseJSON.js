@@ -27,5 +27,10 @@ export default {
             return list[0]
         })
         return filesSplit
+    },
+    request(fileName){
+        const data = fs.readFileSync(`${dir}/${fileName}`)
+        const inputs = JSON.parse(data)
+        return inputs
     }
 }

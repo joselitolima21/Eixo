@@ -15,14 +15,21 @@ export default function Graph({ history }) {
   const [P3,setP3] = useState('')
   const [P4,setP4] = useState('')
   const [P5,setP5] = useState('')
-  const [P6,setP6] = useState('')
+  const [Kt1,setKt1] = useState('')
+  const [Kt2,setKt2] = useState('')
+  const [Kt3,setKt3] = useState('')
+  const [Kt4,setKt4] = useState('')
+  const [Kt5,setKt5] = useState('')
+  const [Kts1,setKts1] = useState('')
+  const [Kts2,setKts2] = useState('')
+  const [Kts3,setKts3] = useState('')
+  const [Kts4,setKts4] = useState('')
+  const [Kts5,setKts5] = useState('')
 
   const [alert,setAlert] = useState(false)
 
   useEffect(()=>{
-    const file = localStorage.getItem('file')
-    const inputs = JSON.parse(file)
-    const [data,labels] = calc(inputs)
+    const [data,labels] = calc.graph()
     setData(data)
     setLabels(labels)
   },[]) // eslint-disable-line
@@ -59,40 +66,58 @@ export default function Graph({ history }) {
     // history.push('/')
     //}
 
-    async function handlePlusPoints(){
+    async function handlePlusPoints(event){
+      event.preventDefault()
       const n = numPoints + 1
-      if (n<=6){
+      if (n<=5){
         setNumPoints(n)
       }
     }
-    async function handleMinusPoints(){
+    async function handleMinusPoints(event){
+      event.preventDefault()
       const n = numPoints - 1
       if (n>=1){
-        if(numPoints === 6){
-          setP6('')
-        } else if (numPoints === 5){
+        if(numPoints === 5){
           setP5('')
+          setKt5('')
+          setKts5('')
         } else if (numPoints === 4){
           setP4('')
+          setKt4('')
+          setKts4('')
         } else if (numPoints === 3){
           setP3('')
+          setKt3('')
+          setKts3('')
         } else if (numPoints === 2){
           setP2('')
+          setKt2('')
+          setKts2('')
         } else if (numPoints === 1){
           setP1('')
+          setKt1('')
+          setKts1('')
         }
       setNumPoints(n)
       }
     }
     function handleSubmitNext(){
-      const allPoints = [P1,P2,P3,P4,P5,P6]
+      const allPoints = [P1,P2,P3,P4,P5]
+      const allKt = [Kt1,Kt2,Kt3,Kt4,Kt5]
+      const allKts = [Kts1,Kts2,Kts3,Kts4,Kts5]
       const points = allPoints.filter((point)=>(point === '' ? false : true))
-      if(points[0]){
+      const ktFilter = allKt.filter((point)=>(point === '' ? false : true))
+      const ktsFilter = allKts.filter((point)=>(point === '' ? false : true))
+
+      if(points[0] && ktFilter[0] && ktsFilter[0]){
         var infos = JSON.parse(localStorage.getItem('file'))
         infos.points = points
+        infos.kt = ktFilter
+        infos.kts = ktsFilter
         localStorage.setItem('file',JSON.stringify(infos))
         const fileName = localStorage.getItem('fileName')
         db.save(fileName,infos)
+        history.push('/results')
       } else {
         setAlert(true)
       }
@@ -133,87 +158,117 @@ export default function Graph({ history }) {
           </div>
           </header>
               <div className="graph">
-              <Line className="graph" data={dataSet} />
-              </div>
-              <label className="label5" >Observando o gráfico e de acordo com a disposição dos componentes no eixo,
+              <Line height={120}  className="graph" data={dataSet} />
+              <label className="label10" >Observando o gráfico e de acordo com a disposição dos componentes no eixo,
               escolha pontos que você deseja saber o diâmetro, por exemplo, 
               se o <br/> pico do gráfico de momento for em 5 metros e você deseja saber o diâmetro nesse ponto 
               coloque 5 no campo abaixo </label>
               <div className="teste">
               <form>
-                  <div class="form-Edited">
+                  <div class="form-Edited20">
+                    
+                    <div className='intro'>
                     <label class="label7">Posições de interesse</label>
-                    <button class="btn btn-default" onClick = {()=> handleMinusPoints()}  >
+                    <button class="btn btn-default" onClick = {(event)=> handleMinusPoints(event)}  >
                     <span class="icon icon-minus-circled"></span>
                     </button>
                     
-                    <button class="btn btn-default" onClick = {()=> handlePlusPoints()}  >
+                    <button class="btn btn-default" onClick = {(event)=> handlePlusPoints(event)}  >
                     <span class="icon icon-plus-circled"></span>
                     </button>
+                    </div>
 
-                    <>
+                    <div className='fatores'>
                     <label class="label6" >P1</label>
                     <input id ="potency" type="number" class="form-control4" placeholder="mm" 
                     onChange ={event =>{setP1(event.target.value);setAlert(false)}}
-                    value = {P1}
-                    />
-                    </>
+                    value = {P1}/>
+                    <label class="label6" >Kt1</label>
+                    <input  type="number" class="form-control4" placeholder="" 
+                    onChange ={event =>{setKt1(event.target.value);setAlert(false)}}
+                    value = {Kt1}/>
+                     <label class="label6" >Kts1</label>
+                    <input type="number" class="form-control4" placeholder="" 
+                    onChange ={event =>{setKts1(event.target.value);setAlert(false)}}
+                    value = {Kts1}/>
+                    </div>
+
                     { numPoints>=2 && (
-                    <>
+                    <div className='fatores'>
                     <label class="label6" >P2</label>
                     <input id ="potency" type="number" class="form-control4" placeholder="mm" 
                     onChange ={event =>{setP2(event.target.value);setAlert(false)}}
-                    value = {P2}
-                    />
-                    </>)}
+                    value = {P2}/>
+                    <label class="label6" >Kt2</label>
+                    <input  type="number" class="form-control4" placeholder="" 
+                    onChange ={event =>{setKt2(event.target.value);setAlert(false)}}
+                    value = {Kt2}/>
+                     <label class="label6" >Kts2</label>
+                    <input type="number" class="form-control4" placeholder="" 
+                    onChange ={event =>{setKts2(event.target.value);setAlert(false)}}
+                    value = {Kts2}/>
+                    </div>)}
                     { numPoints>=3 && (
-                    <>
+                    <div className='fatores'>
                     <label class="label6" >P3</label>
                     <input id ="potency" type="number" class="form-control4" placeholder="mm" 
                     onChange ={event =>{setP3(event.target.value);setAlert(false)}}
-                    value = {P3}
-                    />
-                    </>)}
+                    value = {P3}/>
+                    <label class="label6" >Kt3</label>
+                    <input  type="number" class="form-control4" placeholder="" 
+                    onChange ={event =>{setKt3(event.target.value);setAlert(false)}}
+                    value = {Kt3}/>
+                     <label class="label6" >Kts3</label>
+                    <input type="number" class="form-control4" placeholder="" 
+                    onChange ={event =>{setKts3(event.target.value);setAlert(false)}}
+                    value = {Kts3}/>
+                    </div>)}
                     { numPoints>=4 && (
-                    <>
+                    <div className='fatores'>
                     <label class="label6" >P4</label>
                     <input id ="potency" type="number" class="form-control4" placeholder="mm" 
                     onChange ={event =>{setP4(event.target.value);setAlert(false)}}
-                    value = {P4}
-                    />
-                    </>)}
+                    value = {P4}/>
+                    <label class="label6" >Kt4</label>
+                    <input  type="number" class="form-control4" placeholder="" 
+                    onChange ={event =>{setKt4(event.target.value);setAlert(false)}}
+                    value = {Kt4}/>
+                     <label class="label6" >Kts4</label>
+                    <input type="number" class="form-control4" placeholder="" 
+                    onChange ={event =>{setKts4(event.target.value);setAlert(false)}}
+                    value = {Kts4}/>
+                    </div>)}
                     { numPoints>=5 && (
-                    <>
+                    <div className='fatores'>
                     <label class="label6" >P5</label>
                     <input id ="potency" type="number" class="form-control4" placeholder="mm" 
                     onChange ={event =>{setP5(event.target.value);setAlert(false)}}
-                    value = {P5}
-                    />
-                    </>)}
-                    { numPoints>=6 && (
-                    <>
-                    <label class="label6" >P6</label>
-                    <input id ="potency" type="number" class="form-control4" placeholder="mm" 
-                    onChange ={event =>{setP6(event.target.value);setAlert(false)}}
-                    value = {P6}
-                    />
-                    </>)}
+                    value = {P5}/>
+                    <label class="label6" >Kt5</label>
+                    <input  type="number" class="form-control4" placeholder="" 
+                    onChange ={event =>{setKt5(event.target.value);setAlert(false)}}
+                    value = {Kt5}/>
+                     <label class="label6" >Kts5</label>
+                    <input type="number" class="form-control4" placeholder="" 
+                    onChange ={event =>{setKts5(event.target.value);setAlert(false)}}
+                    value = {Kts5}/>
+                    </div>)}
                   </div>
               </form>
               </div>
+              </div>
+              <footer class="toolbar toolbar-footer">
+              <div class="toolbar-actions1">
         
-        <footer class="toolbar toolbar-footer">
-          <div class="toolbar-actions1">
-        
-            <button type= "submit" class="btn btn-default">
+              <button type= "submit" class="btn btn-default">
               Voltar
-            </button>
+              </button>
             
-            {alert && <label className="label9" >Adicione pelo menos um valor.</label>}
+              {alert && <label className="label9" >Adicione os valores requeridos.</label>}
 
-            <button type= "submit" class="btn btn-primary pull-right" onClick={handleSubmitNext}>
+              <button type= "submit" class="btn btn-primary pull-right" onClick={handleSubmitNext}>
               Próximo
-            </button>
+              </button>
 
           </div>
         </footer>

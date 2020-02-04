@@ -82,7 +82,7 @@ export default function Page1({ history }) {
 
           <div class="window-content">
             <div class="pane-group">
-              <div class="pane pane-sm sidebar">
+              <div class="pane pane-sm sidebar res">
                 <nav class="nav-group">
                   <h5 class="nav-group-title">Dados de Entrada</h5>
                   <span class="nav-group-item active">

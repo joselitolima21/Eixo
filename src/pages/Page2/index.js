@@ -157,7 +157,7 @@ export default function Page2({ history }) {
                           <option>Retificado</option>
                           <option>Usinado ou estirado a frio</option>
                           <option>Laminado a quente</option>
-                          <option>Fsorjado</option>
+                          <option>Forjado</option>
                         </select>
                       </div>
                       <div class="form-Edited">

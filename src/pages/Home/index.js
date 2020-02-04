@@ -59,12 +59,14 @@ export default function Home({ history }) {
         const name = limpaString(fileNew)
         const fileName = name + '.json'
         localStorage.setItem('fileName',fileName)
-        history.push('./page1')
+        history.push('/page1')
         } else {
           setAlert('fileName')
         }
       } else if(optionChecked === 'option2'){
-        console.log(fileChoiced)
+        const fileName = fileChoiced + '.json'
+        localStorage.setItem('fileName',fileName)
+        history.push('/results')
       }
     }
     return (
