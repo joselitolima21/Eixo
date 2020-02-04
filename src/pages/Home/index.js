@@ -45,6 +45,7 @@ export default function Home({ history }) {
       setOptionChecked(event.target.value)
     }
     function handleGO(event) {
+      event.preventDefault()
       if (optionChecked === 'option1'){        
         if (fileNew){     
             function limpaString(string) {                

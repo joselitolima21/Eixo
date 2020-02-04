@@ -3,10 +3,17 @@ import db from '../controlers/databaseJSON'
 //import utils from './utils'
 export default function () {
 
-    function getInfos() {
-        const fileName = localStorage.getItem('fileName')
-        const inputs = db.request(fileName)
-        return inputs
+    function getInfos(){
+        const file = localStorage.getItem('file')
+        const fileName2 = localStorage.getItem('fileName')
+        if(!file){
+            const inputs = db.request(fileName2)
+            return inputs
+        } else {
+            const file = localStorage.getItem('file')
+            const inputs = JSON.parse(file)
+            return inputs
+        }
     }
 
     const inputs = getInfos()

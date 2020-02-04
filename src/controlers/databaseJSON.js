@@ -4,13 +4,13 @@ const localPath = path.resolve()
 const dir = `${localPath}/db`;
 
 export default {
-    save(name,content) {
+    async save(name,content) {
         //Verifica se não existe
         if (!fs.existsSync(dir)){
         //Efetua a criação do diretório
             fs.mkdirSync(dir);
         }
-        fs.writeFile(`${dir}/${name}`, JSON.stringify(content), function (err) {
+        await fs.writeFile(`${dir}/${name}`, JSON.stringify(content), function (err) {
         if (err) throw err;
         console.log(`Arquivo salvo em ${dir}/${name}`);
         })

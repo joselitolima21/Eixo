@@ -9,7 +9,8 @@ export default function Graph({ history }) {
   const [data,setData] = useState([])
   const [labels,setLabels] = useState([])
   const [numPoints,setNumPoints] = useState(1)
-
+  
+  const  [home,setHome] = useState(false)
   const [P1,setP1] = useState('')
   const [P2,setP2] = useState('')
   const [P3,setP3] = useState('')
@@ -122,8 +123,16 @@ export default function Graph({ history }) {
         setAlert(true)
       }
     }
-
-
+    function handleHome(event) {
+      event.preventDefault();
+      history.push('/')
+      localStorage.removeItem('fileName')
+      localStorage.removeItem('file')
+    }
+    function handleSetHome(event) {
+      event.preventDefault()
+      setHome(true)
+    }
     return (
         <>
         <div class="window">
@@ -132,7 +141,7 @@ export default function Graph({ history }) {
           <div class="toolbar-actions">
 
             <div class="btn-group">
-              <button class="btn btn-default">
+              <button class="btn btn-default" onClick={handleSetHome}>
                 <span class="icon icon-home"></span>
               </button>
               <button class="btn btn-default">
@@ -142,7 +151,17 @@ export default function Graph({ history }) {
                 <span class="icon icon-chart-line"></span>
               </button>
             </div>
-
+            
+            {home && (
+            <>
+            <label className='label200'>Voltar para Home? O que foi salvo será perdido.</label>
+            <button class="btn btn-default active" onClick={(event)=>{setHome(false);handleHome(event)}}>
+              Sim
+            </button>
+            <button class="btn btn-default active"  onClick={()=>setHome(false)} >
+              Não
+            </button>
+            </>)}
 
             <div class="btn-group pull-right">
                 <button onClick = {()=> con.handleMinimize()} class="btn btn-default">

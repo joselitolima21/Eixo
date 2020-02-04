@@ -9,6 +9,7 @@ export default function Page2({ history }) {
     const  [tempOfWork,setTempOfWork] = useState('')
     const  [surfaceFinish,setSurfaceFinish] = useState('Retificado')
     const  [conf,setConf] = useState('50%')
+    const  [home,setHome] = useState(false)
 
     useEffect(()=>{
 
@@ -55,11 +56,26 @@ export default function Page2({ history }) {
       //localStorage.setItem('user',_id);
       history.push('/page1')
     }
-
-    async function handleHome(){
+    function handleHome(event) {
+      event.preventDefault();
       history.push('/')
-    }  
-
+      localStorage.removeItem('fileName')
+      localStorage.removeItem('typeOfMaterial')
+      localStorage.removeItem('sigmaE')
+      localStorage.removeItem('sigmaR')
+      localStorage.removeItem('tempOfWork')
+      localStorage.removeItem('surfaceFinish')
+      localStorage.removeItem('conf')
+      localStorage.removeItem('potency')
+      localStorage.removeItem('rotation')
+      localStorage.removeItem('torque')
+      localStorage.removeItem('l')
+      localStorage.removeItem('r2')
+    }
+    function handleSetHome(event) {
+      event.preventDefault()
+      setHome(true)
+    }
     return (
         <>
         <div class="window">
@@ -68,16 +84,23 @@ export default function Page2({ history }) {
           <div class="toolbar-actions">
 
             <div class="btn-group">
-              <button class="btn btn-default" onClick={handleHome}>
+              <button class="btn btn-default" onClick={handleSetHome}>
                 <span class="icon icon-home"></span>
               </button>
               <button class="btn btn-default active">
               <span class="icon icon-menu"></span>
               </button>
-              <button class="btn btn-default">
-                <span class="icon icon-chart-line"></span>
-              </button>
             </div>
+            {home && (
+            <>
+            <label className='label200'>Voltar para Home? O que foi digitado  será perdido.</label>
+            <button class="btn btn-default active" onClick={(event)=>{setHome(false);handleHome(event)}}>
+              Sim
+            </button>
+            <button class="btn btn-default active"  onClick={()=>setHome(false)}>
+              Não
+            </button>
+            </>)}
 
 
             <div class="btn-group pull-right">

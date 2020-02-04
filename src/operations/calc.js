@@ -4,10 +4,9 @@ import db from '../controlers/databaseJSON'
 export default {
     graph(){
         function getInfos(){
-            const files = db.find()
-            const fileName1 = localStorage.getItem('fileName').split('.')[0]
+            const file = localStorage.getItem('file')
             const fileName2 = localStorage.getItem('fileName')
-            if(files.indexOf(fileName1) !== -1){
+            if(!file){
                 const inputs = db.request(fileName2)
                 return inputs
             } else {
@@ -128,10 +127,9 @@ export default {
     },
     pointMoment(z){
         function getInfos(){
-            const files = db.find()
-            const fileName1 = localStorage.getItem('fileName').split('.')[0]
+            const file = localStorage.getItem('file')
             const fileName2 = localStorage.getItem('fileName')
-            if(files.indexOf(fileName1) !== -1){
+            if(!file){
                 const inputs = db.request(fileName2)
                 return inputs
             } else {
