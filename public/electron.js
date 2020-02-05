@@ -10,16 +10,17 @@ let win
 function createWindow () {
   // Criar uma janela de navegação.
   win = new BrowserWindow({
-    width: 900,
-    height: 600,
-    minWidth: 900,
-    minHeight: 600,
-    maxWidth: 900,
-    maxHeight: 600,
+    width: 1000,
+    height: 700,
+    minWidth: 1000,
+    minHeight: 700,
+    maxWidth: 1000,
+    maxHeight: 700,
     webPreferences: {
       nodeIntegration: true,
     },
-    frame: false
+    frame: false,
+    show: false
   })
 
   // and load the index.html of the app.
@@ -37,7 +38,12 @@ function createWindow () {
     // quando você deve excluir o elemento correspondente.
     win = null
   })
+  win.once('ready-to-show', () => {
+    win.show()
+  })
+  
 }
+
 
 // Este método será chamado quando o Electron tiver finalizado
 // a inicialização e está pronto para criar a janela browser.

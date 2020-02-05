@@ -59,7 +59,7 @@ export default function Graph({ history }) {
           pointHitRadius: 10,
           data: data
         }
-      ]
+      ],
     };
 
     //async function handleHome(event){
@@ -167,9 +167,6 @@ export default function Graph({ history }) {
                 <button onClick = {()=> con.handleMinimize()} class="btn btn-default">
                   <span class="icon icon-minus"></span>
                 </button>
-                <button onClick = {()=> con.handleMaximize()} class="btn btn-default">
-                  <span class="icon icon-plus"></span>
-                </button>
                 <button onClick = {()=> con.handleClose()} class="btn btn-default">
                     <span class="icon icon-cancel"></span>
                 </button>
@@ -177,11 +174,28 @@ export default function Graph({ history }) {
           </div>
           </header>
               <div className="graph">
-              <Line height={120}  className="graph" data={dataSet} />
+              <Line height={120}  className="graph" data={dataSet} options={{
+              scales: {
+                yAxes: [{
+                  scaleLabel: {
+                    display: true,
+                    labelString: 'Momento (kN)',
+                    fontFamily: 'sans-serif',
+                  }
+                }],
+                xAxes: [{
+                  scaleLabel: {
+                    display: true,
+                    labelString: 'z (mm)',
+                    fontFamily: 'sans-serif',
+                  }
+                }]
+              }
+            }}/>
               <label className="label10" >Observando o gráfico e de acordo com a disposição dos componentes no eixo,
-              escolha pontos que você deseja saber o diâmetro, por exemplo, 
-              se o <br/> pico do gráfico de momento for em 5 metros e você deseja saber o diâmetro nesse ponto 
-              coloque 5 no campo abaixo </label>
+              escolha pontos (até 5 pontos) que você deseja saber o diâmetro, e seus respectivos <br/> Kt e Kts, por exemplo, 
+              se o pico do gráfico de momento for em 5 metros e você deseja saber o diâmetro nesse ponto 
+              coloque 5 no campo P1.</label>
               <div className="teste">
               <form>
                   <div class="form-Edited20">

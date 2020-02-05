@@ -2,6 +2,7 @@ import React ,{useState} from 'react'
 import con from '../../controlers/controler'
 import db from '../../controlers/databaseJSON'
 import back from '../../images/back-home.jpg'
+//import icone from '../../images/icone.png'
 
 export default function Home({ history }) {
     const [optionChecked,setOptionChecked] = useState('option1')
@@ -16,8 +17,12 @@ export default function Home({ history }) {
 
     function handleFind(){
       const files = db.find()
+      if(files[0]){
       setFiles(files)
       setFileChoiced(files[0])
+      } else {
+      setFiles(['Nenhum Arquivo Encontrado'])
+      }
     }
     function handleNext1(event) {
       event.preventDefault()
@@ -88,9 +93,6 @@ export default function Home({ history }) {
                 <button onClick = {()=> con.handleMinimize()} class="btn btn-default">
                   <span class="icon icon-minus"></span>
                 </button>
-                <button onClick = {()=> con.handleMaximize()} class="btn btn-default">
-                  <span class="icon icon-plus"></span>
-                </button>
                 <button onClick = {()=> con.handleClose()} class="btn btn-default">
                     <span class="icon icon-cancel"></span>
                 </button>
@@ -99,7 +101,7 @@ export default function Home({ history }) {
           </header>
           <div class="window-content">
             <div className='home'>
-
+           
             <form>
                   {firstChoice && (<>
                   <div className="radio">
@@ -113,7 +115,7 @@ export default function Home({ history }) {
                     <label>
                       <input type="radio" value="option2" checked={optionChecked === 'option2'}
                       onChange={(event)=>handleRadio(event)} className='radio'/>
-                      Carregar algum dimensionamento salvo
+                      Carregar dimensionamento salvo
                     </label>
                   </div>
                   
@@ -138,10 +140,11 @@ export default function Home({ history }) {
                     <button class="botaoNext" onClick={(event)=>handleBack(event)}>
                     Mudar escolha
                     </button>
-                    <button class="botaoBack" onClick={(event)=>handleGO(event)}
+                    { (optionChecked === 'option1' || fileChoiced === 'Nenhum Arquivo encontrado') && 
+                    (<button class="botaoBack" onClick={(event)=>handleGO(event)}
                     >
                     Avançar
-                    </button>
+                    </button>)}
                     
                     </div>)}
                     {alert === 'fileName' && <label class="label8" >Digite algum nome</label>}
@@ -158,3 +161,7 @@ export default function Home({ history }) {
 </>
     )
 };
+
+/*<div className="icone">
+<img src={icone} alt='icone'/>
+</div>*/

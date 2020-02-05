@@ -10,12 +10,12 @@
 - [x] Fazer option 2 ir para os resultados
 ======== PARA AJUSTAR  ====================
 - [x] Fazer apagar files e fileName
-- [ ] Na option2 tratar quando não tiver arquivo 
-- [ ] Tratar para que não exista arquivos iguais
-- [ ] Colocar para adicionar vários componentes
-- [ ] Colocar legenda
+- [x] Na option2 tratar quando não tiver arquivo 
+- [x] Colocar legenda
 - [x] Colocar janela que se sair perderá tudo page1, graph e resultados
 - [ ] Melhorar tela de entrada
+- [ ] Tratar para que não exista arquivos iguais
+- [ ] Colocar para adicionar vários componentes
 ## 1 - Fadiga
 - [x] Obter dados
 - [x] Gerar equações de momento

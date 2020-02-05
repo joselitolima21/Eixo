@@ -9,18 +9,18 @@ export default function Graph({ history }) {
   const [labels, setLabels] = useState([])
   const [points, setPoints] = useState([])
   const [pointChoiced, setPointChoiced] = useState(0)
-  const  [home,setHome] = useState(false)
+  const [home, setHome] = useState(false)
 
   function handleHome(event) {
     event.preventDefault();
     history.push('/')
     localStorage.removeItem('fileName')
     localStorage.removeItem('file')
-    }
-    function handleSetHome(event) {
-      event.preventDefault()
-      setHome(true)
-    }
+  }
+  function handleSetHome(event) {
+    event.preventDefault()
+    setHome(true)
+  }
   useEffect(() => {
     const [data, labels, points] = result()
     setData(data)
@@ -50,7 +50,7 @@ export default function Graph({ history }) {
         pointHoverBorderWidth: 2,
         pointRadius: 1,
         pointHitRadius: 10,
-        data: data[pointChoiced]
+        data: data[pointChoiced],
       }
     ]
   };
@@ -71,25 +71,26 @@ export default function Graph({ history }) {
               <button class="btn btn-default">
                 <span class="icon icon-chart-line"></span>
               </button>
+
+              <button class="btn btn-default active">
+                <span class="icon icon-clipboard"></span>
+              </button>
             </div>
 
             {home && (
-            <>
-            <label className='label200'>Voltar para Home?</label>
-            <button class="btn btn-default active" onClick={(event)=>{setHome(false);handleHome(event)}}>
-              Sim
+              <>
+                <label className='label200'>Voltar para Home?</label>
+                <button class="btn btn-default active" onClick={(event) => { setHome(false); handleHome(event) }}>
+                  Sim
             </button>
-            <button class="btn btn-default active"  onClick={()=>setHome(false)}>
-              Não
+                <button class="btn btn-default active" onClick={() => setHome(false)}>
+                  Não
             </button>
-            </>)}
+              </>)}
 
             <div class="btn-group pull-right">
               <button onClick={() => con.handleMinimize()} class="btn btn-default">
                 <span class="icon icon-minus"></span>
-              </button>
-              <button onClick={() => con.handleMaximize()} class="btn btn-default">
-                <span class="icon icon-plus"></span>
               </button>
               <button onClick={() => con.handleClose()} class="btn btn-default">
                 <span class="icon icon-cancel"></span>
@@ -105,7 +106,7 @@ export default function Graph({ history }) {
               {points.map((p, i) => (
                 <span key={i} class={i === pointChoiced ? "nav-group-item active" : "nav-group-item"}
                   onClick={() => setPointChoiced(i)}>
-                 
+
                   Ponto {i + 1} - {p} mm
                 </span>))
               }
@@ -113,24 +114,43 @@ export default function Graph({ history }) {
           </div>
 
           <div className='graph'>
-            <Line height={140} data={dataSet} />
+            <Line height={140} data={dataSet} options={{
+              scales: {
+                yAxes: [{
+                  scaleLabel: {
+                    display: true,
+                    labelString: 'Diâmetro (mm)',
+                    fontFamily: 'sans-serif',
+                  }
+                }],
+                xAxes: [{
+                  scaleLabel: {
+                    display: true,
+                    labelString: 'Nfs',
+                    fontFamily: 'sans-serif',
+                  }
+                }]
+              }
+            }} />
           </div>
         </div>
 
         <footer class="toolbar toolbar-footer">
-          <div class="toolbar-actions1">
-
-            <button type="submit" class="btn btn-default">
-              Voltar
-            </button>
-
-            <button type="submit" class="btn btn-primary pull-right">
-              Próximo
-            </button>
-
-          </div>
+         
         </footer>
       </div>
     </>
   )
 };
+
+/*<div class="toolbar-actions1">
+
+<button type="submit" class="btn btn-default">
+  Voltar
+</button>
+
+<button type="submit" class="btn btn-primary pull-right">
+  Próximo
+</button>
+
+</div>*/

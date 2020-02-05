@@ -173,9 +173,6 @@ export default function Page3({ history }) {
               <button onClick={() => con.handleMinimize()} class="btn btn-default">
                 <span class="icon icon-minus"></span>
               </button>
-              <button onClick={() => con.handleMaximize()} class="btn btn-default">
-                <span class="icon icon-plus"></span>
-              </button>
               <button onClick={() => con.handleClose()} class="btn btn-default">
                 <span class="icon icon-cancel"></span>
               </button>
@@ -242,7 +239,7 @@ export default function Page3({ history }) {
                     value={posP}
                   />
                 </div>
-                {atention && <label class="label4" >Alguma informação está faltando, verifique essa e as sessões anteriores.</label>}
+                {atention && <label class="label4" >Algumas informações estão faltando, verifique essa e as sessões anteriores.</label>}
               </form>
             </div>
           </div>

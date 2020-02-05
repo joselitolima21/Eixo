@@ -107,9 +107,6 @@ export default function Page2({ history }) {
                 <button onClick = {()=> con.handleMinimize()} class="btn btn-default">
                   <span class="icon icon-minus"></span>
                 </button>
-                <button onClick = {()=> con.handleMaximize()} class="btn btn-default">
-                  <span class="icon icon-plus"></span>
-                </button>
                 <button onClick = {()=> con.handleClose()} class="btn btn-default">
                     <span class="icon icon-cancel"></span>
                 </button>

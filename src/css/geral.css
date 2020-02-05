@@ -161,7 +161,7 @@ text-decoration:none;
     width: 30%;
 }
 .back {
-    width: 70%;
+    width: 75%;
     height: 100%;
 }
 
@@ -353,4 +353,10 @@ text-decoration:none;
     margin-top: 5px;
     vertical-align: middle;
     color: #FF0626;
+}
+
+.icone {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
 }

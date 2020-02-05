@@ -18,6 +18,7 @@ handleMaximize() {
 },
 
 handleClose(){
+    localStorage.clear()
     electron.remote.BrowserWindow.getFocusedWindow().close();
 },
 
