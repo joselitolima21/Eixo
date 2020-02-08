@@ -1,1 +1,39 @@
-{"potency":"2","rotation":"2","torque":"2","l":"2","r2":"2","components":{"pulleys":[{"d":"2","position":"2"}],"gears":[{"d":"2","position":"2","pressionAngle":"2"}]},"sigmaR":"2","sigmaE":"2","typeOfMaterial":"Ferro","units":"im","tempOfWork":"2","surfaceFinish":"Retificado","conf":"50%","typeOfCarreg":"flexao","points":["2"],"kt":["2"],"kts":["2"]}
+{
+    "potency": "2",
+    "rotation": "2",
+    "torque": "2",
+    "l": "2",
+    "r2": "2",
+    "components": {
+        "pulleys": [
+            {
+                "d": "2",
+                "position": "2"
+            }
+        ],
+        "gears": [
+            {
+                "d": "2",
+                "position": "2",
+                "pressionAngle": "2"
+            }
+        ]
+    },
+    "sigmaR": "2",
+    "sigmaE": "2",
+    "typeOfMaterial": "Ferro",
+    "units": "im",
+    "tempOfWork": "2",
+    "surfaceFinish": "Retificado",
+    "conf": "50%",
+    "typeOfCarreg": "flexao",
+    "points": [
+        "2"
+    ],
+    "kt": [
+        "2"
+    ],
+    "kts": [
+        "2"
+    ]
+}

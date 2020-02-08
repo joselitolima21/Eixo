@@ -54,9 +54,10 @@ text-decoration:none;
 }
 
 .form-control3 {
-    width: 30%;
+    width: 5%;
     min-height: 25px;
-    min-width: 150px;
+    min-width: 100px;
+    margin-right: 10px;
     padding: 5px 10px;
     font-size: 13px;
     line-height: 1.6;
@@ -359,4 +360,19 @@ text-decoration:none;
     display: flex;
     justify-content: center;
     margin-top: 10px;
+}
+
+.label11 {
+    vertical-align: middle;
+    text-align: center;
+    width: 30%;
+    margin-top: 8px;
+    min-height: 25px;
+    min-width: 150px;
+    font-size: 13px;
+    margin-bottom: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: rgb(0,0,0)
 }

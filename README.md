@@ -13,9 +13,16 @@
 - [x] Na option2 tratar quando não tiver arquivo 
 - [x] Colocar legenda
 - [x] Colocar janela que se sair perderá tudo page1, graph e resultados
-- [ ] Melhorar tela de entrada
+- [x] Botão avançar na option2
+- [x] Colocar para adicionar vários componentes
+- [ ] Adicioar posição da engrenagem
+- [ ] Calcular utilizando o diâmetro no C_tam
+- [ ] Comprovar o cálculo
 - [ ] Tratar para que não exista arquivos iguais
-- [ ] Colocar para adicionar vários componentes
+- [ ] Escolher entre potencia e rotação ou torque
+- [ ] Focar botoes quando apertar enter
+- [ ] Espaço na aba de cima
+- [ ] Melhorar tela de entrada
 ## 1 - Fadiga
 - [x] Obter dados
 - [x] Gerar equações de momento

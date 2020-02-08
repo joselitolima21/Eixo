@@ -140,7 +140,7 @@ export default function Home({ history }) {
                     <button class="botaoNext" onClick={(event)=>handleBack(event)}>
                     Mudar escolha
                     </button>
-                    { (optionChecked === 'option1' || fileChoiced === 'Nenhum Arquivo encontrado') && 
+                    { (optionChecked === 'option1' || fileChoiced !== 'Nenhum Arquivo encontrado') && 
                     (<button class="botaoBack" onClick={(event)=>handleGO(event)}
                     >
                     Avançar
