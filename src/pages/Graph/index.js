@@ -103,10 +103,10 @@ export default function Graph({ history }) {
       }
     }
     function handleSubmitNext(){
-      const allPoints = [P1,P2,P3,P4,P5]
+      const allPoints = [P1/1000,P2/1000,P3/1000,P4/1000,P5/1000]
       const allKt = [Kt1,Kt2,Kt3,Kt4,Kt5]
       const allKts = [Kts1,Kts2,Kts3,Kts4,Kts5]
-      const points = allPoints.filter((point)=>(point === '' ? false : true))
+      const points = allPoints.filter((point)=>(point === 0 ? false : true))
       const ktFilter = allKt.filter((point)=>(point === '' ? false : true))
       const ktsFilter = allKts.filter((point)=>(point === '' ? false : true))
 

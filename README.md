@@ -8,15 +8,16 @@
 - [x] Criar tela de entrada
 - [x] Criar tela de resultados e algoritmo
 - [x] Fazer option 2 ir para os resultados
-======== PARA AJUSTAR  ====================
+- [ ] ======== PARA AJUSTAR  ====================
 - [x] Fazer apagar files e fileName
 - [x] Na option2 tratar quando não tiver arquivo 
 - [x] Colocar legenda
 - [x] Colocar janela que se sair perderá tudo page1, graph e resultados
 - [x] Botão avançar na option2
 - [x] Colocar para adicionar vários componentes
+- [x] Calcular utilizando o diâmetro no C_tam
+- [ ] Concertar o dividido por 1000 quado passa
 - [ ] Adicioar posição da engrenagem
-- [ ] Calcular utilizando o diâmetro no C_tam
 - [ ] Comprovar o cálculo
 - [ ] Tratar para que não exista arquivos iguais
 - [ ] Escolher entre potencia e rotação ou torque

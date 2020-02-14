@@ -108,7 +108,8 @@ export default {
             return Array.from({ length }, (_,i) => (start + step*i).toFixed(2));
         }
         
-        const labels = range(0,0.2,l)
+        const inter = l/8
+        const labels = range(0,inter,l)
         
         const data = labels.map((z)=>{
         

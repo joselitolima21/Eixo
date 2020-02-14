@@ -1,6 +1,6 @@
 export default { 
     
-    sigmaFlinha(inputs) {
+    Cfadiga(inputs) {
     let sigmaR = inputs.sigmaR
     const typeOfCarreg = inputs.typeOfCarreg
     const surfaceFinish = inputs.surfaceFinish
@@ -21,9 +21,6 @@ export default {
     else if(typeOfCarreg === "cisalhamento"){
         C_carr = 0.577
     }
-    
-    // Inicialmente C_tam == 1
-    const C_tam = 1;
     
     if(surfaceFinish === 'Retificado'){
         const A = 1.58;
@@ -88,15 +85,13 @@ export default {
     else if(conf === 99.9999){
         C_conf = 0.620;
     }
-    const sigmaF = 0.5*C_tam*C_carr*C_conf*C_super*C_temp*sigmaR
+    const Cfadiga = C_carr*C_conf*C_super*C_temp
     
-    return sigmaF
+    return Cfadiga
 },
     fatoresK(inputs){
-        //const sigmaRf = inputs.sigmaR*0.145037737730209215 + 20
-        //const sigmaRt = inputs.sigmaR*0.145037737730209215 + 20
-        const sigmaRf = inputs.sigmaR
-        const sigmaRt = inputs.sigmaR + 20
+        const sigmaRf = inputs.sigmaR*0.145037737730209215
+        const sigmaRt = inputs.sigmaR*0.145037737730209215 + 20
         //const r = inputs.r
         const r = 0.01
         const kt = inputs.kt
@@ -106,7 +101,7 @@ export default {
         var at
         
         if(sigmaRf > 50 && sigmaRf < 55 ){
-            af = 0,130;
+            af = 0.130;
         }
         else if(sigmaRf > 55 && sigmaRf < 60){
             af = 0.118;
@@ -155,7 +150,7 @@ export default {
         }
 
         if(sigmaRt > 50 && sigmaRt < 55 ){
-            at = 0,130;
+            at = 0.130;
         }
         else if(sigmaRt > 55 && sigmaRt < 60){
             at = 0.118;
@@ -213,7 +208,7 @@ export default {
 
        const kfs = kts.map((k)=>{
             const kfs = 1 + qt*(k- 1)
-            return kf
+            return kfs
        })
 
        return [kf,kfs]

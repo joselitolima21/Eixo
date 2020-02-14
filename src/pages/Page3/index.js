@@ -149,20 +149,20 @@ export default function Page3({ history }) {
   async function handleSubmitNext(event) {
     event.preventDefault();
     const pulleys = [
-        { d: dp1, position: posP1 },
-        { d: dp2, position: posP2 },
-        { d: dp3, position: posP3 },
-        { d: dp4, position: posP4 },
-        { d: dp5, position: posP5 },
-        { d: dp6, position: posP6 }
+        { d: dp1/1000, position: posP1/1000 },
+        { d: dp2/1000, position: posP2/1000 },
+        { d: dp3/1000, position: posP3/1000 },
+        { d: dp4/1000, position: posP4/1000 },
+        { d: dp5/1000, position: posP5/1000 },
+        { d: dp6/1000, position: posP6/1000 }
       ]
     const gears = [
-        { d: dg1, position: posG1, pressionAngle: pressionAngle1 },
-        { d: dg2, position: posG2, pressionAngle: pressionAngle2 },
-        { d: dg3, position: posG3, pressionAngle: pressionAngle3 },
-        { d: dg4, position: posG4, pressionAngle: pressionAngle4 },
-        { d: dg5, position: posG5, pressionAngle: pressionAngle5 },
-        { d: dg6, position: posG6, pressionAngle: pressionAngle6 }
+        { d: dg1/1000, position: posG1/1000, pressionAngle: pressionAngle1 },
+        { d: dg2/1000, position: posG2/1000, pressionAngle: pressionAngle2 },
+        { d: dg3/1000, position: posG3/1000, pressionAngle: pressionAngle3 },
+        { d: dg4/1000, position: posG4/1000, pressionAngle: pressionAngle4 },
+        { d: dg5/1000, position: posG5/1000, pressionAngle: pressionAngle5 },
+        { d: dg6/1000, position: posG6/1000, pressionAngle: pressionAngle6 }
       ]
     
     const pul = pulleys.filter((p)=>(p.d && p.position))

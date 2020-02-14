@@ -39,8 +39,8 @@ export default function Page1({ history }) {
         localStorage.setItem('potency',potency);
         localStorage.setItem('rotation',rotation);
         localStorage.setItem('torque',torque);
-        localStorage.setItem('l',l);
-        localStorage.setItem('r2',r2);
+        localStorage.setItem('l',l/1000);
+        localStorage.setItem('r2',r2/1000);
         history.push('/page2')
     }
     function handleHome(event) {
