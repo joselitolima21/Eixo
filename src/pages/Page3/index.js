@@ -171,8 +171,8 @@ export default function Page3({ history }) {
     localStorage.setItem('components', JSON.stringify(components))
 
     function validate() {
-      const pot = localStorage.getItem('potency')
-      const rot = localStorage.getItem('rotation')
+      //const pot = localStorage.getItem('potency')
+      //const rot = localStorage.getItem('rotation')
       const tor = localStorage.getItem('torque')
       const l = localStorage.getItem('l')
       const r2 = localStorage.getItem('r2')
@@ -183,14 +183,14 @@ export default function Page3({ history }) {
       const surfaceFinish = localStorage.getItem('surfaceFinish')
       const conf = localStorage.getItem('conf')
 
-      if (pot && rot && tor && l && r2 && typeOfMaterial && sigmaE && sigmaR && tempOfWork
+      if (tor && l && r2 && typeOfMaterial && sigmaE && sigmaR && tempOfWork
         && surfaceFinish && conf && components) {
         let file = {
-          "potency": pot,
-          "rotation": rot,
+          //"potency": pot,
+          //"rotation": rot,
           "torque": tor,
-          "l": l,
-          "r2": r2,
+          "l": l/1000,
+          "r2": r2/1000,
           "sigmaR": sigmaR,
           "sigmaE": sigmaE,
           "components": components,
@@ -204,8 +204,8 @@ export default function Page3({ history }) {
 
         localStorage.setItem('file', JSON.stringify(file))
 
-        localStorage.removeItem('potency')
-        localStorage.removeItem('rotation')
+        //localStorage.removeItem('potency')
+        //localStorage.removeItem('rotation')
         localStorage.removeItem('torque')
         localStorage.removeItem('l')
         localStorage.removeItem('r2')
@@ -233,8 +233,8 @@ export default function Page3({ history }) {
     localStorage.removeItem('tempOfWork')
     localStorage.removeItem('surfaceFinish')
     localStorage.removeItem('conf')
-    localStorage.removeItem('potency')
-    localStorage.removeItem('rotation')
+    //localStorage.removeItem('potency')
+    //localStorage.removeItem('rotation')
     localStorage.removeItem('torque')
     localStorage.removeItem('l')
     localStorage.removeItem('r2')

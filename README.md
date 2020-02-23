@@ -8,7 +8,7 @@
 - [x] Criar tela de entrada
 - [x] Criar tela de resultados e algoritmo
 - [x] Fazer option 2 ir para os resultados
-- [ ] ======== PARA AJUSTAR  ====================
+- [x] ======== PARA AJUSTAR  ====================
 - [x] Fazer apagar files e fileName
 - [x] Na option2 tratar quando não tiver arquivo 
 - [x] Colocar legenda
@@ -16,14 +16,15 @@
 - [x] Botão avançar na option2
 - [x] Colocar para adicionar vários componentes
 - [x] Calcular utilizando o diâmetro no C_tam
-- [ ] Concertar o dividido por 1000 quado passa
+- [x] Concertar o dividido por 1000 quando passa
+- [x] Comprovar o cálculo
+- [x] Espaço na aba de cima
 - [ ] Adicioar posição da engrenagem
-- [ ] Comprovar o cálculo
+## Não são importantes
+- [ ] Melhorar tela de entrada
+- [x] Focar botoes quando apertar enter
 - [ ] Tratar para que não exista arquivos iguais
 - [ ] Escolher entre potencia e rotação ou torque
-- [ ] Focar botoes quando apertar enter
-- [ ] Espaço na aba de cima
-- [ ] Melhorar tela de entrada
 ## 1 - Fadiga
 - [x] Obter dados
 - [x] Gerar equações de momento
@@ -38,5 +39,5 @@
 - [ ] Integrar e calcular deflexões radiais
 - [ ] Verificar se está ok
 ## 3 - Vibração
-- [ ] Em breve
+- [ ] Em breve 
    

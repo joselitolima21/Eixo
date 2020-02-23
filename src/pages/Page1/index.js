@@ -3,26 +3,26 @@ import con from '../../controlers/controler'
 
 export default function Page1({ history }) {
     
-    const  [potency,setPotency] = useState('')
-    const  [rotation,setRotation] = useState('')
+    //const  [potency,setPotency] = useState('')
+    //const  [rotation,setRotation] = useState('')
     const  [torque,setTorque] = useState('')
     const  [l,setl] = useState('')
     const  [r2,setR2] = useState('')
     const  [home,setHome] = useState(false)
 
     useEffect(()=>{
-      const pot= localStorage.getItem('potency')
-      const rot = localStorage.getItem('rotation')
+      //const pot= localStorage.getItem('potency')
+      //const rot = localStorage.getItem('rotation')
       const tor = localStorage.getItem('torque') 
       const l = localStorage.getItem('l')
       const r2 = localStorage.getItem('r2')
 
-      if (pot){
-        setPotency(pot)
-      }
-      if(rot) {
-        setRotation(rot)
-      }
+      //if (pot){
+        //setPotency(pot)
+      //}
+      //if(rot) {
+        //setRotation(rot)
+      //}
       if(tor) {
         setTorque(tor)
       } 
@@ -36,11 +36,11 @@ export default function Page1({ history }) {
 
     async function handleSubmit(event){
         event.preventDefault();
-        localStorage.setItem('potency',potency);
-        localStorage.setItem('rotation',rotation);
+        //localStorage.setItem('potency',potency);
+        //localStorage.setItem('rotation',rotation);
         localStorage.setItem('torque',torque);
-        localStorage.setItem('l',l/1000);
-        localStorage.setItem('r2',r2/1000);
+        localStorage.setItem('l',l);
+        localStorage.setItem('r2',r2);
         history.push('/page2')
     }
     function handleHome(event) {
@@ -58,8 +58,8 @@ export default function Page1({ history }) {
       localStorage.removeItem('tempOfWork')
       localStorage.removeItem('surfaceFinish')
       localStorage.removeItem('conf')
-      localStorage.removeItem('potency')
-      localStorage.removeItem('rotation')
+      //localStorage.removeItem('potency')
+      //localStorage.removeItem('rotation')
       localStorage.removeItem('torque')
       localStorage.removeItem('l')
       localStorage.removeItem('r2')
@@ -69,7 +69,7 @@ export default function Page1({ history }) {
       setHome(true)
     }
     return (
-        <>
+        <div>
         <div class="window">
         <header class="toolbar toolbar-header">
           
@@ -128,20 +128,21 @@ export default function Page1({ history }) {
            
             <div class="work">
               <form>
+                {/*
                   <div class="form-Edited">
                     <label class="label2" >Potência transmitida</label>
                     <input id ="potency" type="number" class="form-control2" placeholder="W" 
                     onChange ={event =>setPotency(event.target.value)}
                     value = {potency}
                     />
-                  </div>
-                  <div class="form-Edited">
+                  </div>*/}
+                  {/*<div class="form-Edited">
                       <label class="label2" >Rotação</label>
                       <input id = "rotation" type="number" class="form-control2" placeholder="rpm"
                       onChange ={event =>setRotation(event.target.value)}
                       value = {rotation}
                       />
-                  </div>
+                </div>*/}
                   <div class="form-Edited">
                       <label class="label2" >Torque</label>
                       <input id = "torque" type="number" class="form-control2" placeholder="N.m"
@@ -177,6 +178,6 @@ export default function Page1({ history }) {
             </div>
           </footer>
         </div>
-</>
+</div>
     )
 };

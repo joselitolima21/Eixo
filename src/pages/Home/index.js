@@ -14,7 +14,7 @@ export default function Home({ history }) {
     const [fileChoiced,setFileChoiced] = useState('')
     const [fileNew,setFileNew] = useState('')
     const [alert,setAlert] = useState('')
-
+   
     function handleFind(){
       const files = db.find()
       if(files[0]){
@@ -75,8 +75,15 @@ export default function Home({ history }) {
         history.push('/results')
       }
     }
+    function keyPress(event){
+      if (event.key === "Enter" && firstChoice) {
+        handleNext1(event)
+      } else if (event.key === "Enter" && !firstChoice) {
+        handleGO(event)
+      }
+    }
     return (
-        <>
+        <div onKeyPress={(event)=>keyPress(event)}>
         <div class="window">
         <header class="toolbar toolbar-header">
           
@@ -104,7 +111,7 @@ export default function Home({ history }) {
            
             <form>
                   {firstChoice && (<>
-                  <div className="radio">
+                    <div className="radio">
                     <label>
                       <input type="radio" value="option1" checked={optionChecked === 'option1'}
                       onChange={(event)=>handleRadio(event)} className='radio'/>
@@ -158,7 +165,7 @@ export default function Home({ history }) {
             
           </footer>
         </div>
-</>
+</div>
     )
 };
 
