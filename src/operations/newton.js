@@ -1,10 +1,10 @@
 const mathjs = window.require('mathjs')
 export default function(T,M,N,Kf,Kfs,Cfadiga,sigmaR) {
-var t = true
+var epochs = 0
 // Valores iniciais
-var sigmaFlinha0 = 200000
-var d0 = 10
-while(t){
+var sigmaFlinha0 = 50000000
+var d0 = 0.1
+while(epochs <= 1000){
     const e = 0.01
     //Constantes necessarias
     const pi = mathjs.pi
@@ -14,6 +14,7 @@ while(t){
     // Jacobiana e sua inversa
     const f1y = (Ct/(3*(sigmaFlinha0**2)))*(((Ct/sigmaFlinha0)+(Ct/(sigmaR*1000000)))**(-2/3))
     const f2y = (Cf/((sigmaFlinha0**2)*0.097))*((Cf/sigmaFlinha0)**(0.903/0.097))
+    console.log(f1y)
     const J = mathjs.matrix([[1,f1y],[1,f2y]])
     const detJ = 1/mathjs.det(J)
     const inv = mathjs.matrix([[f2y,-f1y],[-1,1]])
@@ -34,7 +35,6 @@ while(t){
     const Ey = mathjs.abs(sigmaFlinha1 - sigmaFlinha0)
     console.log(d1)
     if (Ex < e && Ey < e){        
-        t = false
         console.log("DEU")
         return d1
     } else {
@@ -42,5 +42,7 @@ while(t){
         d0 = d1
         console.log("NÃO DEU")
     }
+    console.log(epochs)
+    epochs = epochs + 1
 }
 }

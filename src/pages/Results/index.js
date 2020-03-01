@@ -107,7 +107,7 @@ export default function Graph({ history }) {
                 <span key={i} class={i === pointChoiced ? "nav-group-item active" : "nav-group-item"}
                   onClick={() => setPointChoiced(i)}>
 
-                  Ponto {i + 1} - {p} mm
+                  Ponto {i + 1} - {p} m
                 </span>))
               }
             </nav>
@@ -119,7 +119,7 @@ export default function Graph({ history }) {
                 yAxes: [{
                   scaleLabel: {
                     display: true,
-                    labelString: 'Diâmetro (mm)',
+                    labelString: 'Diâmetro (m)',
                     fontFamily: 'sans-serif',
                   }
                 }],

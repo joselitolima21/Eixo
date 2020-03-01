@@ -1,9 +1,7 @@
 {
-    "potency": "2",
-    "rotation": "2",
     "torque": "7.5",
-    "l": "0.65",
-    "r2": "0.5",
+    "l": 0.65,
+    "r2": 0.5,
     "sigmaR": "420",
     "sigmaE": "350",
     "components": {
@@ -23,21 +21,24 @@
     },
     "typeOfMaterial": "Aço",
     "units": "im",
-    "tempOfWork": "70",
+    "tempOfWork": "60",
     "surfaceFinish": "Usinado ou estirado a frio",
-    "conf": "50%",
+    "conf": "99,99%",
     "typeOfCarreg": "flexao",
     "points": [
+        0.08,
         0.25,
         0.5,
         0.65
     ],
     "kt": [
+        "3.5",
         "4",
         "3.5",
         "4"
     ],
     "kts": [
+        "2",
         "4",
         "2",
         "4"

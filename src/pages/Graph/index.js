@@ -179,14 +179,14 @@ export default function Graph({ history }) {
                 yAxes: [{
                   scaleLabel: {
                     display: true,
-                    labelString: 'Momento (kN)',
+                    labelString: 'Momento (N.m)',
                     fontFamily: 'sans-serif',
                   }
                 }],
                 xAxes: [{
                   scaleLabel: {
                     display: true,
-                    labelString: 'z (mm)',
+                    labelString: 'Comprimento do eixo (m)',
                     fontFamily: 'sans-serif',
                   }
                 }]
@@ -194,8 +194,8 @@ export default function Graph({ history }) {
             }}/>
               <label className="label10" >Observando o gráfico e de acordo com a disposição dos componentes no eixo,
               escolha pontos (até 5 pontos) que você deseja saber o diâmetro, e seus respectivos <br/> Kt e Kts, por exemplo, 
-              se o pico do gráfico de momento for em 5 metros e você deseja saber o diâmetro nesse ponto 
-              coloque 5 no campo P1.</label>
+              se o pico do gráfico de momento for em 50 mm e você deseja saber o diâmetro nesse ponto 
+              coloque 50 no campo P1.</label>
               <div className="teste">
               <form>
                   <div class="form-Edited20">

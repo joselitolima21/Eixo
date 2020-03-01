@@ -19,12 +19,13 @@
 - [x] Concertar o dividido por 1000 quando passa
 - [x] Comprovar o cálculo
 - [x] Espaço na aba de cima
+- [x] Ajeitar as unidade mostradas
 - [ ] Adicioar posição da engrenagem
 ## Não são importantes
+- [ ] Arranjar uma forma melhor de mostrar o gráfico
 - [ ] Melhorar tela de entrada
-- [x] Focar botoes quando apertar enter
 - [ ] Tratar para que não exista arquivos iguais
-- [ ] Escolher entre potencia e rotação ou torque
+- [ ] Escolher entre potência e rotação ou torque
 ## 1 - Fadiga
 - [x] Obter dados
 - [x] Gerar equações de momento

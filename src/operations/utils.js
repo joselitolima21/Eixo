@@ -100,7 +100,10 @@ export default {
         var af
         var at
         
-        if(sigmaRf > 50 && sigmaRf < 55 ){
+        if(sigmaRf < 50){
+            af = 0.130;
+        }
+        else if(sigmaRf > 50 && sigmaRf < 55 ){
             af = 0.130;
         }
         else if(sigmaRf > 55 && sigmaRf < 60){
@@ -148,8 +151,11 @@ export default {
         else if(sigmaRf > 240){
             af = 0.009;
         }
-
-        if(sigmaRt > 50 && sigmaRt < 55 ){
+        
+        if(sigmaRt < 50){
+            at = 0.130;
+        }
+        else if(sigmaRt > 50 && sigmaRt < 55 ){
             at = 0.130;
         }
         else if(sigmaRt > 55 && sigmaRt < 60){
