@@ -14,7 +14,6 @@ while(epochs <= 1000){
     // Jacobiana e sua inversa
     const f1y = (Ct/(3*(sigmaFlinha0**2)))*(((Ct/sigmaFlinha0)+(Ct/(sigmaR*1000000)))**(-2/3))
     const f2y = (Cf/((sigmaFlinha0**2)*0.097))*((Cf/sigmaFlinha0)**(0.903/0.097))
-    console.log(f1y)
     const J = mathjs.matrix([[1,f1y],[1,f2y]])
     const detJ = 1/mathjs.det(J)
     const inv = mathjs.matrix([[f2y,-f1y],[-1,1]])

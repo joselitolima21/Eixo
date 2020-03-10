@@ -1,10 +1,10 @@
 import React ,{useState,useEffect} from 'react'
 import con from '../../controlers/controler'
-import calc from '../../operations/calc'
+import moments from '../../operations/moments'
 import db from '../../controlers/databaseJSON'
 import { Line } from 'react-chartjs-2'
 
-export default function Graph({ history }) {
+export default function Points({ history }) {
 
   const [data,setData] = useState([])
   const [labels,setLabels] = useState([])
@@ -28,9 +28,11 @@ export default function Graph({ history }) {
   const [Kts5,setKts5] = useState('')
 
   const [alert,setAlert] = useState(false)
+  const [curto,setCurto] = useState(false)
 
   useEffect(()=>{
-    const [data,labels] = calc.graph()
+    const [data,labels,curto] = moments.graph()
+    setCurto(curto)
     setData(data)
     setLabels(labels)
   },[]) // eslint-disable-line
@@ -126,8 +128,7 @@ export default function Graph({ history }) {
     function handleHome(event) {
       event.preventDefault();
       history.push('/')
-      localStorage.removeItem('fileName')
-      localStorage.removeItem('file')
+      localStorage.clear()
     }
     function handleSetHome(event) {
       event.preventDefault()
@@ -186,7 +187,7 @@ export default function Graph({ history }) {
                 xAxes: [{
                   scaleLabel: {
                     display: true,
-                    labelString: 'Comprimento do eixo (m)',
+                    labelString: curto ? 'Comprimento do eixo em milímetros (mm)' : 'Comprimento do eixo em metros (m)',
                     fontFamily: 'sans-serif',
                   }
                 }]

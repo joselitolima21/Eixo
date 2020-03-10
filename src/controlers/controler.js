@@ -1,7 +1,4 @@
 const electron = window.require("electron")
-const app = electron.remote.app; // eslint-disable-line
-
-
 
 export default {
 

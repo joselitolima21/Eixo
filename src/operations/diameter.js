@@ -1,4 +1,4 @@
-import calc from '../operations/calc'
+import moments from '../operations/moments'
 import db from '../controlers/databaseJSON'
 import newton from './newton'
 import utils from './utils'
@@ -7,9 +7,9 @@ export default function () {
 
     function getInfos(){
         const file = localStorage.getItem('file')
-        const fileName2 = localStorage.getItem('fileName')
+        const fileName = localStorage.getItem('fileName')
         if(!file){
-            const inputs = db.request(fileName2)
+            const inputs = db.request(fileName)
             return inputs
         } else {
             const file = localStorage.getItem('file')
@@ -17,20 +17,21 @@ export default function () {
             return inputs
         }
     }
-
     const inputs = getInfos()
+    //  ======= Constantes iguais para todos pontos
     const T = inputs.torque
     const sigmaR = inputs.sigmaR
-    //  ======= Constantes iguais para todos pontos
     const Cfadiga = utils.Cfadiga(inputs)
 
     //  ======= Constantes dependentes dos pontos
     const [kf,kfs] = utils.fatoresK(inputs)
-    const M = inputs.points.map((point) => calc.pointMoment(point))
+    const M = inputs.points.map((point) => moments.pointMoment(point))
+    
     const range = (start, step, end) => {
         const length = (end - start) / step + 1;
         return Array.from({ length }, (_, i) => (start + step * i).toFixed(2));
     }
+    
     const N = range(1, 0.5, 10)
 
     const d = inputs.points.map((p,index) => {

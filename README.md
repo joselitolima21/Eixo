@@ -22,10 +22,11 @@
 - [x] Ajeitar as unidade mostradas
 - [ ] Adicioar posição da engrenagem
 ## Não são importantes
-- [ ] Arranjar uma forma melhor de mostrar o gráfico
+- [x] Arranjar uma forma melhor de mostrar o gráfico
 - [ ] Melhorar tela de entrada
 - [ ] Tratar para que não exista arquivos iguais
 - [ ] Escolher entre potência e rotação ou torque
+- [ ] Salvar diâmetros calculados no arquivo json
 ## 1 - Fadiga
 - [x] Obter dados
 - [x] Gerar equações de momento

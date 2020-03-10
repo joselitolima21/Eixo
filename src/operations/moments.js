@@ -2,6 +2,7 @@ import math from 'math'
 import db from '../controlers/databaseJSON'
 
 export default {
+    // Retorna os dados x e y para o gráfico de momento
     graph(){
         function getInfos(){
             const file = localStorage.getItem('file')
@@ -107,10 +108,16 @@ export default {
             const length = (end - start)/step + 1;
             return Array.from({ length }, (_,i) => (start + step*i).toFixed(2));
         }
+
+        var labels;
         
-        const inter = l/8
-        const labels = range(0,inter,l)
-        
+        if(l>0.1){
+            const inter = l/8
+            labels = range(0,inter,l)
+        } else {
+            const inter = l/5
+            labels = range(0,inter,l)
+        }
         const data = labels.map((z)=>{
         
             const xz = rex.map((item)=>{
@@ -124,8 +131,14 @@ export default {
             const res = (xz**2 + yz**2)**(1/2)
             return res.toFixed(4)
         })
-        return [data,labels]
+        var curto = false
+        if(l<0.1){
+        labels = labels.map(l=>l*1000)
+        curto = true
+        }
+        return [data,labels,curto]
     },
+    // Retorna o valor de momento em um ponto especifico
     pointMoment(z){
         function getInfos(){
             const file = localStorage.getItem('file')

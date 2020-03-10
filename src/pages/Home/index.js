@@ -1,92 +1,92 @@
-import React ,{useState} from 'react'
+import React, { useState } from 'react'
 import con from '../../controlers/controler'
 import db from '../../controlers/databaseJSON'
 import back from '../../images/back-home.jpg'
 //import icone from '../../images/icone.png'
 
 export default function Home({ history }) {
-    const [optionChecked,setOptionChecked] = useState('option1')
-    const [campo1,setCampo1] = useState(false)
-    const [campo2,setCampo2] = useState(false)
-    const [buttons,setButtons] = useState(false)
-    const [firstChoice,setFirstChoice] = useState(true)
-    const [files,setFiles] = useState([])
-    const [fileChoiced,setFileChoiced] = useState('')
-    const [fileNew,setFileNew] = useState('')
-    const [alert,setAlert] = useState('')
-   
-    function handleFind(){
-      const files = db.find()
-      if(files[0]){
+  const [optionChecked, setOptionChecked] = useState('option1')
+  const [campo1, setCampo1] = useState(false)
+  const [campo2, setCampo2] = useState(false)
+  const [buttons, setButtons] = useState(false)
+  const [firstChoice, setFirstChoice] = useState(true)
+  const [files, setFiles] = useState([])
+  const [fileChoiced, setFileChoiced] = useState('')
+  const [fileNew, setFileNew] = useState('')
+  const [alert, setAlert] = useState('')
+
+  function handleFind() {
+    const files = db.find()
+    if (files[0]) {
       setFiles(files)
       setFileChoiced(files[0])
-      } else {
+    } else {
       setFiles(['Nenhum Arquivo Encontrado'])
-      }
     }
-    function handleNext1(event) {
-      event.preventDefault()
-      if (optionChecked === 'option1'){
-        setFirstChoice(false)
-        setCampo1(true)
-        setButtons(true)
-      } else if (optionChecked === 'option2') {
-        handleFind()
-        setCampo2(true)
-        setButtons(true)
-        setFirstChoice(false)
-      }
+  }
+  function handleNext1(event) {
+    event.preventDefault()
+    if (optionChecked === 'option1') {
+      setFirstChoice(false)
+      setCampo1(true)
+      setButtons(true)
+    } else if (optionChecked === 'option2') {
+      handleFind()
+      setCampo2(true)
+      setButtons(true)
+      setFirstChoice(false)
     }
-    function handleBack(event) {
-      event.preventDefault()
-      setAlert('')
-      setOptionChecked('option1')
-      setCampo1(false)
-      setCampo2(false)
-      setButtons(false)
-      setFirstChoice(true)
-    }
-    function handleRadio(event) {
-      setOptionChecked(event.target.value)
-    }
-    function handleGO(event) {
-      event.preventDefault()
-      if (optionChecked === 'option1'){        
-        if (fileNew){     
-            function limpaString(string) {                
-                var n = "";
-                for( var i = 0; i < string.length; i++ ) {
-                    if( string.charAt(i) !== " " && string.charAt(i) !== "." ) {
-                        n += string.charAt(i);
-                    }
-                  }
-                  return n
+  }
+  function handleBack(event) {
+    event.preventDefault()
+    setAlert('')
+    setOptionChecked('option1')
+    setCampo1(false)
+    setCampo2(false)
+    setButtons(false)
+    setFirstChoice(true)
+  }
+  function handleRadio(event) {
+    setOptionChecked(event.target.value)
+  }
+  function handleGO(event) {
+    event.preventDefault()
+    if (optionChecked === 'option1') {
+      if (fileNew) {
+        function limpaString(string) {
+          var n = "";
+          for (var i = 0; i < string.length; i++) {
+            if (string.charAt(i) !== " " && string.charAt(i) !== ".") {
+              n += string.charAt(i);
             }
+          }
+          return n
+        }
         const name = limpaString(fileNew)
         const fileName = name + '.json'
-        localStorage.setItem('fileName',fileName)
+        localStorage.setItem('fileName', fileName)
         history.push('/page1')
-        } else {
-          setAlert('fileName')
-        }
-      } else if(optionChecked === 'option2'){
-        const fileName = fileChoiced + '.json'
-        localStorage.setItem('fileName',fileName)
-        history.push('/results')
+      } else {
+        setAlert('fileName')
       }
+    } else if (optionChecked === 'option2') {
+      const fileName = fileChoiced + '.json'
+      localStorage.setItem('fileName', fileName)
+      history.push('/results')
     }
-    function keyPress(event){
-      if (event.key === "Enter" && firstChoice) {
-        handleNext1(event)
-      } else if (event.key === "Enter" && !firstChoice) {
-        handleGO(event)
-      }
+  }
+  function keyPress(event) {
+    if (event.key === "Enter" && firstChoice) {
+      handleNext1(event)
+    } else if (event.key === "Enter" && !firstChoice) {
+      handleGO(event)
     }
-    return (
-        <div onKeyPress={(event)=>keyPress(event)}>
-        <div class="window">
+  }
+  return (
+    <div onKeyPress={(event) => keyPress(event)}>
+      <div class="window">
         <header class="toolbar toolbar-header">
-          
+
           <div class="toolbar-actions">
 
             <div class="btn-group">
@@ -95,78 +95,78 @@ export default function Home({ history }) {
               </button>
             </div>
 
-            
-            <div class="btn-group pull-right">
-                <button onClick = {()=> con.handleMinimize()} class="btn btn-default">
-                  <span class="icon icon-minus"></span>
-                </button>
-                <button onClick = {()=> con.handleClose()} class="btn btn-default">
-                    <span class="icon icon-cancel"></span>
-                </button>
-          </div>
-          </div>
-          </header>
-          <div class="window-content">
-            <div className='home'>
-           
-            <form>
-                  {firstChoice && (<>
-                    <div className="radio">
-                    <label>
-                      <input type="radio" value="option1" checked={optionChecked === 'option1'}
-                      onChange={(event)=>handleRadio(event)} className='radio'/>
-                      Iniciar novo dimensionamento
-                    </label>
-                  </div>
-                  <div className="radio">
-                    <label>
-                      <input type="radio" value="option2" checked={optionChecked === 'option2'}
-                      onChange={(event)=>handleRadio(event)} className='radio'/>
-                      Carregar dimensionamento salvo
-                    </label>
-                  </div>
-                  
-                  
-                  <div className='buttons1'>
-                  <button class="botaoBack" onClick={(event)=>handleNext1(event)}>
-                  Avançar
-                  </button>
-                  </div>
-                  </>)}
 
-                  <div className='form-next'>
-                    {campo1 && (
-                    <input type="text" class="form-control5" placeholder="Nome para ser salvo" 
-                    onChange ={event =>{setFileNew(event.target.value);setAlert('')}}/>)}
-                    {campo2 && (<select class="form-control5" 
-                    onChange ={event =>setFileChoiced(event.target.value)}>
-                    {files.map((file)=>(<option key={file}>{file}</option>))}</select>)}
-                    </div>
-                    {buttons && 
-                    (<div className='buttons'>
-                    <button class="botaoNext" onClick={(event)=>handleBack(event)}>
+            <div class="btn-group pull-right">
+              <button onClick={() => con.handleMinimize()} class="btn btn-default">
+                <span class="icon icon-minus"></span>
+              </button>
+              <button onClick={() => con.handleClose()} class="btn btn-default">
+                <span class="icon icon-cancel"></span>
+              </button>
+            </div>
+          </div>
+        </header>
+        <div class="window-content">
+          <div className='home'>
+
+            <form>
+              {firstChoice && (<>
+                <div className="radio">
+                  <label>
+                    <input type="radio" value="option1" checked={optionChecked === 'option1'}
+                      onChange={(event) => handleRadio(event)} className='radio' />
+                    Iniciar novo dimensionamento
+                    </label>
+                </div>
+                <div className="radio">
+                  <label>
+                    <input type="radio" value="option2" checked={optionChecked === 'option2'}
+                      onChange={(event) => handleRadio(event)} className='radio' />
+                    Carregar dimensionamento salvo
+                    </label>
+                </div>
+
+
+                <div className='buttons1'>
+                  <button class="botaoBack" onClick={(event) => handleNext1(event)}>
+                    Avançar
+                  </button>
+                </div>
+              </>)}
+
+              <div className='form-next'>
+                {campo1 && (
+                  <input type="text" class="form-control5" placeholder="Nome para ser salvo"
+                    onChange={event => { setFileNew(event.target.value); setAlert('') }} />)}
+                {campo2 && (<select class="form-control5"
+                  onChange={event => setFileChoiced(event.target.value)}>
+                  {files.map((file) => (<option key={file}>{file}</option>))}</select>)}
+              </div>
+              {buttons &&
+                (<div className='buttons'>
+                  <button class="botaoNext" onClick={(event) => handleBack(event)}>
                     Mudar escolha
                     </button>
-                    { (optionChecked === 'option1' || fileChoiced !== 'Nenhum Arquivo encontrado') && 
-                    (<button class="botaoBack" onClick={(event)=>handleGO(event)}
+                  {(optionChecked === 'option1' || fileChoiced !== 'Nenhum Arquivo encontrado') &&
+                    (<button class="botaoBack" onClick={(event) => handleGO(event)}
                     >
-                    Avançar
+                      Avançar
                     </button>)}
-                    
-                    </div>)}
-                    {alert === 'fileName' && <label class="label8" >Digite algum nome</label>}
+
+                </div>)}
+              {alert === 'fileName' && <label class="label8" >Digite algum nome</label>}
             </form>
 
-            </div>
-            <img src={back} alt='back' className = 'back'/>
           </div>
-              
-        <footer class="toolbar toolbar-footer">
-            
-          </footer>
+          <img src={back} alt='back' className='back' />
         </div>
-</div>
-    )
+
+        <footer class="toolbar toolbar-footer">
+
+        </footer>
+      </div>
+    </div>
+  )
 };
 
 /*<div className="icone">

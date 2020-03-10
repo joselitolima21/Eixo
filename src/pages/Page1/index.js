@@ -13,7 +13,7 @@ export default function Page1({ history }) {
     useEffect(()=>{
       //const pot= localStorage.getItem('potency')
       //const rot = localStorage.getItem('rotation')
-      const tor = localStorage.getItem('torque') 
+      const tor = localStorage.getItem('torque')
       const l = localStorage.getItem('l')
       const r2 = localStorage.getItem('r2')
 
@@ -46,23 +46,7 @@ export default function Page1({ history }) {
     function handleHome(event) {
       event.preventDefault();
       history.push('/')
-      localStorage.removeItem('fileName')
-      localStorage.removeItem('dp')
-      localStorage.removeItem('posP')
-      localStorage.removeItem('dg')
-      localStorage.removeItem('pressionAngle')
-      localStorage.removeItem('posG')
-      localStorage.removeItem('typeOfMaterial')
-      localStorage.removeItem('sigmaE')
-      localStorage.removeItem('sigmaR')
-      localStorage.removeItem('tempOfWork')
-      localStorage.removeItem('surfaceFinish')
-      localStorage.removeItem('conf')
-      //localStorage.removeItem('potency')
-      //localStorage.removeItem('rotation')
-      localStorage.removeItem('torque')
-      localStorage.removeItem('l')
-      localStorage.removeItem('r2')
+      localStorage.clear()
     }
     function handleSetHome(event) {
       event.preventDefault()

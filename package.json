@@ -1,6 +1,6 @@
 {
   "name": "eixo",
-  "version": "1.0",
+  "version": "1.0.1",
   "main": "public/electron.js",
   "license": "MIT",
   "description": "Aplicativo para dimensionamento de eixos de transmissão",

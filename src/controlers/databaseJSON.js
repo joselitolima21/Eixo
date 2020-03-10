@@ -4,6 +4,7 @@ const localPath = path.resolve()
 const dir = `${localPath}/db`;
 
 export default {
+    //Salva o arquivo
     async save(name,content) {
         //Verifica se não existe
         if (!fs.existsSync(dir)){
@@ -15,6 +16,7 @@ export default {
         console.log(`Arquivo salvo em ${dir}/${name}`);
         })
         },
+    //Retorna o nome dos arquivos
     find() {
         //Verifica se não existe
         if (!fs.existsSync(dir)){
@@ -28,6 +30,7 @@ export default {
         })
         return filesSplit
     },
+    //Ler o arquivo
     request(fileName){
         const data = fs.readFileSync(`${dir}/${fileName}`)
         const inputs = JSON.parse(data)
