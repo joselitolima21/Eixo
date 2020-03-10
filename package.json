@@ -12,7 +12,7 @@
       "node_modules/**/*"
     ],
     "directories": {
-      "buildResources": "assets"
+      "buildResources": "public"
     },
     "productName": "Eixo"
   },
