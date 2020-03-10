@@ -12,15 +12,14 @@ function createWindow () {
   win = new BrowserWindow({
     width: 1000,
     height: 700,
-    minWidth: 1000,
-    minHeight: 700,
-    maxWidth: 1000,
-    maxHeight: 700,
     webPreferences: {
       nodeIntegration: true,
+      devTools: isDev ? true : false
     },
     frame: false,
-    show: false
+    show: false,
+    title: 'Eixo',
+    resizable: false,
   })
 
   // and load the index.html of the app.
