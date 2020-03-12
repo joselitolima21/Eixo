@@ -1,58 +1,67 @@
-import React, { useState } from 'react'
+import React from 'react'
 import con from '../../controlers/controler'
 import db from '../../controlers/databaseJSON'
 import back from '../../images/back-home.jpg'
+import { useSelector, useDispatch } from 'react-redux'
+import { actions } from '../../store/reducers/homeReducer'
 //import icone from '../../images/icone.png'
 
 export default function Home({ history }) {
-  const [optionChecked, setOptionChecked] = useState('option1')
-  const [campo1, setCampo1] = useState(false)
-  const [campo2, setCampo2] = useState(false)
-  const [buttons, setButtons] = useState(false)
-  const [firstChoice, setFirstChoice] = useState(true)
-  const [files, setFiles] = useState([])
-  const [fileChoiced, setFileChoiced] = useState('')
-  const [fileNew, setFileNew] = useState('')
-  const [alert, setAlert] = useState('')
 
+  const state = useSelector(state => state.homeReducer);
+  const dispatch = useDispatch()
+
+  // Muda a opçaõ escolhida
+  function handleRadio(event) {
+    dispatch(actions.setOptionChecked(event.target.value))
+  }
+
+  // Avanca depedendo da opção
+  function handleNext1(event) {
+    event.preventDefault()
+    if (state.optionChecked === 'option1') {
+      dispatch(actions.setFirstChoice(false))
+    } else if (state.optionChecked === 'option2') {
+      handleFind()
+      dispatch(actions.setFirstChoice(false))
+    }
+  }
+
+  // Acha os arquivos da opcao 2
   function handleFind() {
     const files = db.find()
     if (files[0]) {
-      setFiles(files)
-      setFileChoiced(files[0])
+      dispatch(actions.setFile(files, files[0], ''))
+      console.log(state.files)
     } else {
-      setFiles(['Nenhum Arquivo Encontrado'])
+      dispatch(actions.setFile(['Nenhum Arquivo Encontrado'], '', ''))
     }
   }
-  function handleNext1(event) {
-    event.preventDefault()
-    if (optionChecked === 'option1') {
-      setFirstChoice(false)
-      setCampo1(true)
-      setButtons(true)
-    } else if (optionChecked === 'option2') {
-      handleFind()
-      setCampo2(true)
-      setButtons(true)
-      setFirstChoice(false)
-    }
+
+  // Muda o file escolhido na option 2
+  function handleFileChange(event) {
+    dispatch(actions.setFile(state.files, event.target.value, ''))
   }
+
+  // Muda o nome do file escolhido na option 1
+  function handleFileName(event) {
+    dispatch(actions.setFile([], '', event.target.value));
+    dispatch(actions.alert(''));
+  }
+
+  // Volta para primeira tela
   function handleBack(event) {
     event.preventDefault()
-    setAlert('')
-    setOptionChecked('option1')
-    setCampo1(false)
-    setCampo2(false)
-    setButtons(false)
-    setFirstChoice(true)
+    dispatch(actions.back())
   }
-  function handleRadio(event) {
-    setOptionChecked(event.target.value)
-  }
+
+  //Segundo botao de avançar
   function handleGO(event) {
     event.preventDefault()
-    if (optionChecked === 'option1') {
-      if (fileNew) {
+    // Se a opção for a 1
+    // Se digitar o nome
+    if (state.optionChecked === 'option1') {
+      if (state.fileNew) {
         function limpaString(string) {
           var n = "";
           for (var i = 0; i < string.length; i++) {
@@ -62,26 +71,35 @@ export default function Home({ history }) {
           }
           return n
         }
-        const name = limpaString(fileNew)
+        const name = limpaString(state.fileNew)
         const fileName = name + '.json'
+        // Depois salvar no redux
         localStorage.setItem('fileName', fileName)
         history.push('/page1')
-      } else {
-        setAlert('fileName')
       }
-    } else if (optionChecked === 'option2') {
-      const fileName = fileChoiced + '.json'
+      // Se não digitar o nome
+      else {
+        dispatch(actions.alert('fileName'))
+      }
+    }
+    // Se a opção for a 2
+    else if (state.optionChecked === 'option2') {
+      const fileName = state.fileChoiced + '.json'
+      // Depois salvar no redux
       localStorage.setItem('fileName', fileName)
       history.push('/results')
     }
   }
+
+  // Funçao para o botao enter
   function keyPress(event) {
-    if (event.key === "Enter" && firstChoice) {
+    if (event.key === "Enter" && state.firstChoice) {
       handleNext1(event)
-    } else if (event.key === "Enter" && !firstChoice) {
+    } else if (event.key === "Enter" && !state.firstChoice) {
       handleGO(event)
     }
   }
+
   return (
     <div onKeyPress={(event) => keyPress(event)}>
       <div class="window">
@@ -110,51 +128,53 @@ export default function Home({ history }) {
           <div className='home'>
 
             <form>
-              {firstChoice && (<>
-                <div className="radio">
-                  <label>
-                    <input type="radio" value="option1" checked={optionChecked === 'option1'}
-                      onChange={(event) => handleRadio(event)} className='radio' />
+              {state.firstChoice && (
+                <>
+                  <div className="radio">
+                    <label>
+                      <input type="radio" value="option1" checked={state.optionChecked === 'option1'}
+                        onChange={(event) => handleRadio(event)} className='radio' />
                     Iniciar novo dimensionamento
                     </label>
-                </div>
-                <div className="radio">
-                  <label>
-                    <input type="radio" value="option2" checked={optionChecked === 'option2'}
-                      onChange={(event) => handleRadio(event)} className='radio' />
+                  </div>
+                  <div className="radio">
+                    <label>
+                      <input type="radio" value="option2" checked={state.optionChecked === 'option2'}
+                        onChange={(event) => handleRadio(event)} className='radio' />
                     Carregar dimensionamento salvo
                     </label>
-                </div>
+                  </div>
 
 
-                <div className='buttons1'>
-                  <button class="botaoBack" onClick={(event) => handleNext1(event)}>
-                    Avançar
+                  <div className='buttons1'>
+                    <button class="botaoBack" onClick={(event) => handleNext1(event)}>
+                      Avançar
                   </button>
-                </div>
-              </>)}
+                  </div>
+                </>)}
 
               <div className='form-next'>
-                {campo1 && (
+                {!state.firstChoice && state.optionChecked === 'option1' && (
                   <input type="text" class="form-control5" placeholder="Nome para ser salvo"
-                    onChange={event => { setFileNew(event.target.value); setAlert('') }} />)}
-                {campo2 && (<select class="form-control5"
-                  onChange={event => setFileChoiced(event.target.value)}>
-                  {files.map((file) => (<option key={file}>{file}</option>))}</select>)}
+                    onChange={event => handleFileName(event)} />)}
+                {!state.firstChoice && state.optionChecked === 'option2' && (<select class="form-control5"
+                  onChange={event => handleFileChange(event)}>
+                  {state.files.map((file) => (<option key={file}>{file}</option>))}</select>)}
               </div>
-              {buttons &&
+
+              {!state.firstChoice &&
                 (<div className='buttons'>
                   <button class="botaoNext" onClick={(event) => handleBack(event)}>
                     Mudar escolha
                     </button>
-                  {(optionChecked === 'option1' || fileChoiced !== 'Nenhum Arquivo encontrado') &&
+                  {(state.optionChecked === 'option1' || state.fileChoiced !== 'Nenhum Arquivo encontrado') &&
                     (<button class="botaoBack" onClick={(event) => handleGO(event)}
                     >
                       Avançar
                     </button>)}
 
                 </div>)}
-              {alert === 'fileName' && <label class="label8" >Digite algum nome</label>}
+              {state.alert === 'fileName' && <label class="label8" >Digite algum nome</label>}
             </form>
 
           </div>

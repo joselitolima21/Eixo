@@ -8,6 +8,7 @@
 - [x] Criar tela de entrada
 - [x] Criar tela de resultados e algoritmo
 - [x] Fazer option 2 ir para os resultados
+- [ ] Implementar redux para salvar os arquivos das pages 1, 2 e 3
 - [x] ======== PARA AJUSTAR  ====================
 - [x] Fazer apagar files e fileName
 - [x] Na option2 tratar quando não tiver arquivo 
