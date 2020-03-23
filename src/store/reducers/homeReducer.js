@@ -4,56 +4,31 @@ const initialState = {
     files: [],
     fileChoiced: '',
     fileNew: '',
-    alert: ''
+    alert: '',
+    fileName: '',
 };
 
 export default function homeReducer(state = initialState, action) {
     switch (action.type) {
         case 'CHANGE_OPTION':
-            return {
-                optionChecked: action.new,
-                firstChoice: state.firstChoice,
-                files: state.files,
-                fileChoiced: state.fileChoiced,
-                fileNew: state.fileNew,
-                alert: state.alert
-            };
+            return { ...state, optionChecked: action.option };
         case 'CHANGE_FIRST_CHOICE':
-            return {
-                optionChecked: state.optionChecked,
-                firstChoice: action.new,
-                files: state.files,
-                fileChoiced: state.fileChoiced,
-                fileNew: state.fileNew,
-                alert: state.alert
-            };
+            return { ...state, firstChoice: action.choice };
         case 'CHANGE_FILE':
             return {
-                optionChecked: state.optionChecked,
-                firstChoice: state.firstChoice,
+                ...state,
                 files: action.files,
                 fileChoiced: action.fileChoiced,
                 fileNew: action.fileNew,
-                alert: state.alert
             };
         case 'BACK':
             return {
-                optionChecked: 'option1',
-                firstChoice: true,
-                files: [],
-                fileChoiced: '',
-                fileNew: '',
-                alert: ''
+                ...initialState
             };
         case 'ALERT':
-            return {
-                optionChecked: state.optionChecked,
-                firstChoice: state.firstChoice,
-                files: state.files,
-                fileChoiced: state.fileChoiced,
-                fileNew: state.fileNew,
-                alert: action.alert
-            };
+            return { ...state, alert: action.alert };
+        case 'CHANGE_FILE_NAME':
+            return { ...state, fileName: action.fileName };
         default:
             return state
     }
@@ -61,10 +36,10 @@ export default function homeReducer(state = initialState, action) {
 
 export const actions = {
     setOptionChecked: (option) => (
-        { type: 'CHANGE_OPTION', new: option }
+        { type: 'CHANGE_OPTION', option: option }
     ),
     setFirstChoice: (choice) => (
-        { type: 'CHANGE_FIRST_CHOICE', new: choice }
+        { type: 'CHANGE_FIRST_CHOICE', choice: choice }
     ),
     setFile: (files, fileChoiced, fileNew) => (
         {
@@ -72,6 +47,12 @@ export const actions = {
             files: files,
             fileChoiced: fileChoiced,
             fileNew: fileNew
+        }
+    ),
+    setFileName: (fileName) => (
+        {
+            type: 'CHANGE_FILE_NAME',
+            fileName: fileName,
         }
     ),
     back: () => (

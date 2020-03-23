@@ -73,8 +73,7 @@ export default function Home({ history }) {
         }
         const name = limpaString(state.fileNew)
         const fileName = name + '.json'
-        // Depois salvar no redux
-        localStorage.setItem('fileName', fileName)
+        dispatch(actions.setFileName(fileName))
         history.push('/page1')
       }
       // Se não digitar o nome
@@ -84,9 +83,8 @@ export default function Home({ history }) {
     }
     // Se a opção for a 2
     else if (state.optionChecked === 'option2') {
-      const fileName = state.fileChoiced + '.json'
-      // Depois salvar no redux
-      localStorage.setItem('fileName', fileName)
+      const fileName = state.fileChoiced + '.json'      
+      dispatch(actions.setFileName(fileName))
       history.push('/results')
     }
   }

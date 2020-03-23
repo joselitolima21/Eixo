@@ -1,52 +1,24 @@
-import React, {useState,useEffect} from 'react'
+import React, {useState} from 'react'
 import con from '../../controlers/controler'
+import { useSelector, useDispatch } from 'react-redux'
+import { actions } from '../../store/reducers/dataReducer'
 
 export default function Page1({ history }) {
     
-    //const  [potency,setPotency] = useState('')
-    //const  [rotation,setRotation] = useState('')
-    const  [torque,setTorque] = useState('')
-    const  [l,setl] = useState('')
-    const  [r2,setR2] = useState('')
+    const state = useSelector(state => state.dataReducer)
+    const dispatch = useDispatch()
     const  [home,setHome] = useState(false)
-
-    useEffect(()=>{
-      //const pot= localStorage.getItem('potency')
-      //const rot = localStorage.getItem('rotation')
-      const tor = localStorage.getItem('torque')
-      const l = localStorage.getItem('l')
-      const r2 = localStorage.getItem('r2')
-
-      //if (pot){
-        //setPotency(pot)
-      //}
-      //if(rot) {
-        //setRotation(rot)
-      //}
-      if(tor) {
-        setTorque(tor)
-      } 
-      if(l) {
-        setl(l)
-      } 
-      if(r2) {
-        setR2(r2)
-      } 
-    },[]) // eslint-disable-line 
-
-    async function handleSubmit(event){
+    
+    // Vai para a próxima page
+    function handleSubmit(event){
         event.preventDefault();
-        //localStorage.setItem('potency',potency);
-        //localStorage.setItem('rotation',rotation);
-        localStorage.setItem('torque',torque);
-        localStorage.setItem('l',l);
-        localStorage.setItem('r2',r2);
         history.push('/page2')
     }
+    // Ir para home
     function handleHome(event) {
       event.preventDefault();
+      dispatch(actions.back())
       history.push('/')
-      localStorage.clear()
     }
     function handleSetHome(event) {
       event.preventDefault()
@@ -130,22 +102,22 @@ export default function Page1({ history }) {
                   <div class="form-Edited">
                       <label class="label2" >Torque</label>
                       <input id = "torque" type="number" class="form-control2" placeholder="N.m"
-                      onChange ={event =>setTorque(event.target.value)}
-                      value = {torque}
+                      onChange ={event =>dispatch(actions.setTorque(event.target.value))}
+                      value = {state.torque}
                       />
                   </div>
                   <div class="form-Edited">
                       <label class="label2" >Comprimento do Eixo</label>
                       <input id = "l" type="number" class="form-control2" placeholder="mm"
-                      onChange ={event =>setl(event.target.value)}
-                      value = {l}
+                      onChange ={event =>dispatch(actions.setL(event.target.value))}
+                      value = {state.l}
                       />
                   </div>
                   <div class="form-Edited">
                       <label class="label3" >Posição do segundo mancal (da esquerda para a direita tendo como base o primeiro mancal)</label>
                       <input id = "l" type="number" class="form-control3" placeholder="mm"
-                      onChange ={event =>setR2(event.target.value)}
-                      value = {r2}
+                      onChange ={event =>dispatch(actions.setR2(event.target.value))}
+                      value = {state.r2}
                       />
                   </div>
               </form>

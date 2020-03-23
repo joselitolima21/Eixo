@@ -1,35 +1,35 @@
 {
     "torque": "7.5",
-    "l": 0.65,
-    "r2": 0.5,
+    "l": "650",
+    "r2": "500",
     "sigmaR": "420",
     "sigmaE": "350",
     "components": {
         "pulleys": [
             {
-                "d": 0.07,
-                "position": 0.65
+                "d": "70",
+                "position": "650"
             }
         ],
         "gears": [
             {
-                "d": 0.05,
-                "position": 0.25,
+                "d": "50",
+                "position": "250",
                 "pressionAngle": "25"
             }
         ]
     },
     "typeOfMaterial": "Aço",
-    "units": "im",
+    "units": "si",
     "tempOfWork": "60",
     "surfaceFinish": "Usinado ou estirado a frio",
     "conf": "99,99%",
     "typeOfCarreg": "flexao",
     "points": [
-        0.08,
-        0.25,
-        0.5,
-        0.65
+        "80",
+        "250",
+        "500",
+        "650"
     ],
     "kt": [
         "3.5",
@@ -42,5 +42,8 @@
         "4",
         "2",
         "4"
-    ]
+    ],
+    "NP": 1,
+    "NG": 1,
+    "Npoints": 4
 }

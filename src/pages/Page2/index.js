@@ -1,53 +1,17 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import con from '../../controlers/controler'
+import { useSelector, useDispatch } from 'react-redux'
+import { actions } from '../../store/reducers/dataReducer'
 
 export default function Page2({ history }) {
+  
+  const state = useSelector(state => state.dataReducer)
+  const dispatch = useDispatch()
 
-  const [typeOfMaterial, setTypeOfMaterial] = useState('Aço')
-  const [sigmaE, setSigmaE] = useState('')
-  const [sigmaR, setSigmaR] = useState('')
-  const [tempOfWork, setTempOfWork] = useState('')
-  const [surfaceFinish, setSurfaceFinish] = useState('Retificado')
-  const [conf, setConf] = useState('50%')
   const [home, setHome] = useState(false)
-
-  useEffect(() => {
-
-    const typeOfMaterial = localStorage.getItem('typeOfMaterial')
-    const sigmaE = localStorage.getItem('sigmaE')
-    const sigmaR = localStorage.getItem('sigmaR')
-    const tempOfWork = localStorage.getItem('tempOfWork')
-    const surfaceFinish = localStorage.getItem('surfaceFinish')
-    const conf = localStorage.getItem('conf')
-
-    if (typeOfMaterial) {
-      setTypeOfMaterial(typeOfMaterial)
-    }
-    if (sigmaE) {
-      setSigmaE(sigmaE)
-    }
-    if (sigmaR) {
-      setSigmaR(sigmaR)
-    }
-    if (tempOfWork) {
-      setTempOfWork(tempOfWork)
-    }
-    if (surfaceFinish) {
-      setSurfaceFinish(surfaceFinish)
-    }
-    if (conf) {
-      setConf(conf)
-    }
-  }, []) // eslint-disable-line 
 
   async function handleSubmitNext(event) {
     event.preventDefault();
-    localStorage.setItem('typeOfMaterial', typeOfMaterial);
-    localStorage.setItem('sigmaE', sigmaE);
-    localStorage.setItem('sigmaR', sigmaR);
-    localStorage.setItem('tempOfWork', tempOfWork);
-    localStorage.setItem('surfaceFinish', surfaceFinish);
-    localStorage.setItem('conf', conf);
     history.push('/page3')
   }
 
@@ -57,8 +21,8 @@ export default function Page2({ history }) {
   }
   function handleHome(event) {
     event.preventDefault();
+    dispatch(actions.back())
     history.push('/')
-    localStorage.clear()
   }
   function handleSetHome(event) {
     event.preventDefault()
@@ -127,8 +91,8 @@ export default function Page2({ history }) {
                 <div class="form-Edited">
                   <label class="label2" >Material do Eixo</label>
                   <select class="form-control2"
-                    onChange={event => setTypeOfMaterial(event.target.value)}
-                    value={typeOfMaterial}
+                    onChange={event => dispatch(actions.setTypeOfMaterial(event.target.value))}
+                    value={state.typeOfMaterial}
                   >
                     <option>Aço</option>
                     <option>Ferro</option>
@@ -138,29 +102,29 @@ export default function Page2({ history }) {
                 <div class="form-Edited">
                   <label class="label2" >&sigma;e</label>
                   <input type="number" class="form-control2" placeholder="MPa"
-                    onChange={event => setSigmaE(event.target.value)}
-                    value={sigmaE}
+                    onChange={event => dispatch(actions.setSigmaE(event.target.value))}
+                    value={state.sigmaE}
                   />
                 </div>
                 <div class="form-Edited">
                   <label class="label2" >&sigma;r</label>
                   <input type="number" class="form-control2" placeholder="MPa"
-                    onChange={event => setSigmaR(event.target.value)}
-                    value={sigmaR}
+                    onChange={event => dispatch(actions.setSigmaR(event.target.value))}
+                    value={state.sigmaR}
                   />
                 </div>
                 <div class="form-Edited">
                   <label class="label2" >Temperatura de trabalho</label>
                   <input type="number" class="form-control2" placeholder="°C"
-                    onChange={event => setTempOfWork(event.target.value)}
-                    value={tempOfWork}
+                    onChange={event => dispatch(actions.setTempOfWork(event.target.value))}
+                    value={state.tempOfWork}
                   />
                 </div>
                 <div class="form-Edited">
                   <label class="label2" >Acabamento Superficial</label>
                   <select class="form-control2"
-                    onChange={event => setSurfaceFinish(event.target.value)}
-                    value={surfaceFinish}
+                    onChange={event => dispatch(actions.setSurfaceFinish(event.target.value))}
+                    value={state.surfaceFinish}
                   >
                     <option>Retificado</option>
                     <option>Usinado ou estirado a frio</option>
@@ -171,8 +135,8 @@ export default function Page2({ history }) {
                 <div class="form-Edited">
                   <label class="label2" >Confiabilidade</label>
                   <select class="form-control2"
-                    onChange={event => setConf(event.target.value)}
-                    value={conf}
+                    onChange={event => dispatch(actions.setConf(event.target.value))}
+                    value={state.conf}
                   >
                     <option>50%</option>
                     <option>90%</option>

@@ -2,8 +2,13 @@ import React, { useState, useEffect } from 'react'
 import con from '../../controlers/controler'
 import result from '../../operations/diameter'
 import { Line } from 'react-chartjs-2'
+import { useSelector, useDispatch } from 'react-redux'
+import { actions } from '../../store/reducers/dataReducer'
 
 export default function Graph({ history }) {
+  const { fileName } = useSelector(state => state.homeReducer)
+  const state = useSelector(state => state.dataReducer)
+  const dispatch = useDispatch()
 
   const [data, setData] = useState([])
   const [labels, setLabels] = useState([])
@@ -13,20 +18,19 @@ export default function Graph({ history }) {
 
   function handleHome(event) {
     event.preventDefault();
+    dispatch(actions.back())
     history.push('/')
-    localStorage.removeItem('fileName')
-    localStorage.removeItem('file')
   }
   function handleSetHome(event) {
     event.preventDefault()
     setHome(true)
   }
   useEffect(() => {
-    const [data, labels, points] = result()
+    const [data, labels, points] = result(state, fileName)
     setData(data)
     setLabels(labels)
     setPoints(points)
-  }, [])
+  }, []) //eslint-disable-line
 
   const dataSet = {
     labels: labels,
@@ -107,7 +111,7 @@ export default function Graph({ history }) {
                 <span key={i} class={i === pointChoiced ? "nav-group-item active" : "nav-group-item"}
                   onClick={() => setPointChoiced(i)}>
 
-                  Ponto {i + 1} - {p} m
+                  Ponto {i + 1} - {p / 1000} m
                 </span>))
               }
             </nav>
@@ -136,7 +140,7 @@ export default function Graph({ history }) {
         </div>
 
         <footer class="toolbar toolbar-footer">
-         
+
         </footer>
       </div>
     </>

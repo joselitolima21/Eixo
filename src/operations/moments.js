@@ -3,47 +3,32 @@ import db from '../controlers/databaseJSON'
 
 export default {
     // Retorna os dados x e y para o gráfico de momento
-    graph(){
-        function getInfos(){
-            const file = localStorage.getItem('file')
-            const fileName2 = localStorage.getItem('fileName')
-            if(!file){
-                const inputs = db.request(fileName2)
-                return inputs
-            } else {
-                const file = localStorage.getItem('file')
-                const inputs = JSON.parse(file)
-                return inputs
-            }
-        }
-        
-        const inputs = getInfos()
-        
+    graph(state){
         //Obtenção dos valores das Reações
-        const T = inputs.torque
-        const r2 = inputs.r2
-        const pulleys = inputs.components.pulleys
-        const gears = inputs.components.gears
-        const l = inputs.l
+        const T = state.torque
+        const r2 = state.r2/1000
+        const pulleys = state.components.pulleys
+        const gears = state.components.gears
+        const l = state.l/1000
         
         const forcesPulleys = pulleys.map((pulley)=>{
-            const rp = pulley.d/2
+            const rp = pulley.d/2000
             const Fn = T/rp
             const Fs = 1.5*Fn
-            const Ms = Fs*pulley.position
-            const pos = pulley.position
+            const Ms = Fs*(pulley.position/1000)
+            const pos = pulley.position/1000
             const result = {Fs,Ms,pos}
             return result
         })
         
         const forcesGears = gears.map((gear)=>{
-            const rg = gear.d/2
+            const rg = gear.d/2000
             const Fg = -T/rg
             const angleRad = gear.pressionAngle*math.PI/180
             const Fr = -Fg*math.tan(angleRad)
-            const Mr = Fr*gear.position
-            const Mg = Fg*gear.position
-            const pos = gear.position
+            const Mr = Fr*(gear.position/1000)
+            const Mg = Fg*(gear.position/1000)
+            const pos = gear.position/1000
             const result = {Fr,Fg,Mr,Mg,pos}
             return result 
         })
@@ -136,20 +121,17 @@ export default {
         labels = labels.map(l=>l*1000)
         curto = true
         }
+        console.log(data)
         return [data,labels,curto]
     },
     // Retorna o valor de momento em um ponto especifico
-    pointMoment(z){
+    pointMoment(z,state,fileName){
         function getInfos(){
-            const file = localStorage.getItem('file')
-            const fileName2 = localStorage.getItem('fileName')
-            if(!file){
-                const inputs = db.request(fileName2)
+            if(!state.torque){
+                const inputs = db.request(fileName)
                 return inputs
             } else {
-                const file = localStorage.getItem('file')
-                const inputs = JSON.parse(file)
-                return inputs
+                return state
             }
         }
         
@@ -157,28 +139,28 @@ export default {
         
         //Obtenção dos valores das Reações
         const T = inputs.torque
-        const r2 = inputs.r2
+        const r2 = inputs.r2/1000
         const pulleys = inputs.components.pulleys
         const gears = inputs.components.gears
         
         const forcesPulleys = pulleys.map((pulley)=>{
-            const rp = pulley.d/2
+            const rp = pulley.d/2000
             const Fn = T/rp
             const Fs = 1.5*Fn
-            const Ms = Fs*pulley.position
-            const pos = pulley.position
+            const Ms = Fs*(pulley.position/1000)
+            const pos = pulley.position/1000
             const result = {Fs,Ms,pos}
             return result
         })
         
         const forcesGears = gears.map((gear)=>{
-            const rg = gear.d/2
+            const rg = gear.d/2000
             const Fg = -T/rg
             const angleRad = gear.pressionAngle*math.PI/180
             const Fr = -Fg*math.tan(angleRad)
-            const Mr = Fr*gear.position
-            const Mg = Fg*gear.position
-            const pos = gear.position
+            const Mr = Fr*(gear.position/1000)
+            const Mg = Fg*(gear.position/1000)
+            const pos = gear.position/1000
             const result = {Fr,Fg,Mr,Mg,pos}
             return result 
         })
@@ -240,11 +222,11 @@ export default {
         const rey = forcesY.concat(ListGearsY)
         
         const xz = rex.map((item)=>{
-            return sing(z,item.f,item.pos)
+            return sing(z/1000,item.f,item.pos)
         }).reduce((prev,current) => prev + current,0)
     
         const yz = rey.map((item)=>{
-            return sing(z,item.f,item.pos)
+            return sing(z/1000,item.f,item.pos)
         }).reduce((prev,current) => prev + current,0)
     
         const res = (xz**2 + yz**2)**(1/2)

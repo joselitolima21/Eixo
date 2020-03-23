@@ -3,20 +3,17 @@ import db from '../controlers/databaseJSON'
 import newton from './newton'
 import utils from './utils'
 
-export default function () {
+export default function (state,fileName) {
 
     function getInfos(){
-        const file = localStorage.getItem('file')
-        const fileName = localStorage.getItem('fileName')
-        if(!file){
+        if(!state.torque){
             const inputs = db.request(fileName)
             return inputs
         } else {
-            const file = localStorage.getItem('file')
-            const inputs = JSON.parse(file)
-            return inputs
+            return state
         }
     }
+
     const inputs = getInfos()
     //  ======= Constantes iguais para todos pontos
     const T = inputs.torque
@@ -25,7 +22,7 @@ export default function () {
 
     //  ======= Constantes dependentes dos pontos
     const [kf,kfs] = utils.fatoresK(inputs)
-    const M = inputs.points.map((point) => moments.pointMoment(point))
+    const M = inputs.points.map((point) => moments.pointMoment(point,state,fileName))
     
     const range = (start, step, end) => {
         const length = (end - start) / step + 1;

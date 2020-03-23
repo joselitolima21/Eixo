@@ -1,236 +1,72 @@
-import React, { useState /*,useEffect*/ } from 'react'
+import React, { useState } from 'react'
 import con from '../../controlers/controler'
+import db from '../../controlers/databaseJSON'
+import { useSelector, useDispatch } from 'react-redux'
+import { actions } from '../../store/reducers/dataReducer'
+
 
 export default function Page3({ history }) {
-
-  const [dp1, setDp1] = useState('')
-  const [dp2, setDp2] = useState('')
-  const [dp3, setDp3] = useState('')
-  const [dp4, setDp4] = useState('')
-  const [dp5, setDp5] = useState('')
-  const [dp6, setDp6] = useState('')
-
-  const [posP1, setPosP1] = useState('')
-  const [posP2, setPosP2] = useState('')
-  const [posP3, setPosP3] = useState('')
-  const [posP4, setPosP4] = useState('')
-  const [posP5, setPosP5] = useState('')
-  const [posP6, setPosP6] = useState('')
-
-  const [dg1, setDg1] = useState('')
-  const [dg2, setDg2] = useState('')
-  const [dg3, setDg3] = useState('')
-  const [dg4, setDg4] = useState('')
-  const [dg5, setDg5] = useState('')
-  const [dg6, setDg6] = useState('')
-
-  const [pressionAngle1, setPressionAngle1] = useState('')
-  const [pressionAngle2, setPressionAngle2] = useState('')
-  const [pressionAngle3, setPressionAngle3] = useState('')
-  const [pressionAngle4, setPressionAngle4] = useState('')
-  const [pressionAngle5, setPressionAngle5] = useState('')
-  const [pressionAngle6, setPressionAngle6] = useState('')
-
-  const [posG1, setPosG1] = useState('')
-  const [posG2, setPosG2] = useState('')
-  const [posG3, setPosG3] = useState('')
-  const [posG4, setPosG4] = useState('')
-  const [posG5, setPosG5] = useState('')
-  const [posG6, setPosG6] = useState('')
-
+  const { fileName } = useSelector(state => state.homeReducer)
+  const state = useSelector(state => state.dataReducer)
+  const dispatch = useDispatch()
 
   const [atention, setAtention] = useState(false)
-  const [home,setHome] = useState(false)
-  const [numG,setNumG] = useState(1)
-  const [numP,setNumP] = useState(1)
+  const [home, setHome] = useState(false)
 
-  async function handlePlusP(event){
+  // Acrescenta mais polias
+  function handlePlusP(event) {
     event.preventDefault()
-    const n = numP + 1
-    if (n<=6){
-      setNumP(n)
+    if(state.NP <= 5){
+      dispatch(actions.plusP(state.NP + 1))
     }
   }
-  async function handleMinusP(event){
+  function handleMinusP(event) {
     event.preventDefault()
-    const n = numP - 1
-    if (n>=1){
-      if(numP === 6){
-        setDp6('')
-        setPosP6('')
-      } else if(numP === 5){
-        setDp5('')
-        setPosP5('')
-      } else if (numP === 4){
-        setDp4('')
-        setPosP4('')
-      } else if (numP === 3){
-        setDp3('')
-        setPosP3('')
-      } else if (numP === 2){
-        setDp2('')
-        setPosP2('')
-      } else if (numP === 1){
-        setDp1('')
-        setPosP1('')
-      }
-    setNumP(n)
+    if(state.NP >= 2){
+      dispatch(actions.minusP(state.NP - 1))
     }
   }
-  async function handlePlusG(event){
+
+  // Acrescenta mais engrenagens
+  function handlePlusG(event) {
     event.preventDefault()
-    const n = numG + 1
-    if (n<=6){
-      setNumG(n)
+    if(state.NG <= 5){
+      dispatch(actions.plusG(state.NG + 1))
     }
   }
-  async function handleMinusG(event){
+  function handleMinusG(event) {
     event.preventDefault()
-    const n = numG - 1
-    if (n>=1){
-      if(numG === 6){
-        setDg6('')
-        setPosG6('')
-        setPressionAngle6('')
-      } else if(numG === 5){
-        setDg5('')
-        setPosG5('')
-        setPressionAngle5('')
-      } else if (numG === 4){
-        setDg4('')
-        setPosG4('')
-        setPressionAngle4('')
-      } else if (numG === 3){
-        setDg3('')
-        setPosG3('')
-        setPressionAngle3('')
-      } else if (numG === 2){
-        setDg2('')
-        setPosG2('')
-        setPressionAngle2('')
-      } else if (numG === 1){
-        setDg1('')
-        setPosG1('')
-        setPressionAngle1('')
-      }
-    setNumG(n)
+    if(state.NG >= 2){
+      dispatch(actions.minusG(state.NG - 1))
     }
   }
-  /*useEffect(() => {
 
-    const dp = localStorage.getItem('dp')
-    const posP = localStorage.getItem('posP')
-    const dg = localStorage.getItem('dg')
-    const pressionAngle = localStorage.getItem('pressionAngle')
-    const posG = localStorage.getItem('posG')
-
-    if (dp) {
-      setDp(dp)
-    }
-    if (posP) {
-      setPosP(posP)
-    }
-    if (dg) {
-      setDg(dg)
-    }
-    if (pressionAngle) {
-      setPressionAngle(pressionAngle)
-    }
-    if (posG) {
-      setPosG(posG)
-    }
-  }, []) // eslint-disable-line */
-
-  async function handleSubmitBack(event) {
+  function handleSubmitBack(event) {
     event.preventDefault();
     history.push('/page2')
   }
 
-  async function handleSubmitNext(event) {
+  function handleSubmitNext(event) {
     event.preventDefault();
-    const pulleys = [
-        { d: dp1/1000, position: posP1/1000 },
-        { d: dp2/1000, position: posP2/1000 },
-        { d: dp3/1000, position: posP3/1000 },
-        { d: dp4/1000, position: posP4/1000 },
-        { d: dp5/1000, position: posP5/1000 },
-        { d: dp6/1000, position: posP6/1000 }
-      ]
-    const gears = [
-        { d: dg1/1000, position: posG1/1000, pressionAngle: pressionAngle1 },
-        { d: dg2/1000, position: posG2/1000, pressionAngle: pressionAngle2 },
-        { d: dg3/1000, position: posG3/1000, pressionAngle: pressionAngle3 },
-        { d: dg4/1000, position: posG4/1000, pressionAngle: pressionAngle4 },
-        { d: dg5/1000, position: posG5/1000, pressionAngle: pressionAngle5 },
-        { d: dg6/1000, position: posG6/1000, pressionAngle: pressionAngle6 }
-      ]
-    
-    const pul = pulleys.filter((p)=>(p.d && p.position))
-    const ge = gears.filter((g)=>(g.d && g.position && g.pressionAngle))
-    const components = {pulleys:pul,gears:ge}
-    localStorage.setItem('components', JSON.stringify(components))
-
-    function validate() {
-      //const pot = localStorage.getItem('potency')
-      //const rot = localStorage.getItem('rotation')
-      const tor = localStorage.getItem('torque')
-      const l = localStorage.getItem('l')
-      const r2 = localStorage.getItem('r2')
-      const typeOfMaterial = localStorage.getItem('typeOfMaterial')
-      const sigmaE = localStorage.getItem('sigmaE')
-      const sigmaR = localStorage.getItem('sigmaR')
-      const tempOfWork = localStorage.getItem('tempOfWork')
-      const surfaceFinish = localStorage.getItem('surfaceFinish')
-      const conf = localStorage.getItem('conf')
-
-      if (tor && l && r2 && typeOfMaterial && sigmaE && sigmaR && tempOfWork
-        && surfaceFinish && conf && components) {
-        let file = {
-          //"potency": pot,
-          //"rotation": rot,
-          "torque": tor,
-          "l": l/1000,
-          "r2": r2/1000,
-          "sigmaR": sigmaR,
-          "sigmaE": sigmaE,
-          "components": components,
-          "typeOfMaterial": typeOfMaterial,
-          "units": "im",
-          "tempOfWork": tempOfWork,
-          "surfaceFinish": surfaceFinish,
-          "conf": conf,
-          "typeOfCarreg": "flexao"
-        }
-
-        localStorage.setItem('file', JSON.stringify(file))
-
-        //localStorage.removeItem('potency')
-        //localStorage.removeItem('rotation')
-        localStorage.removeItem('torque')
-        localStorage.removeItem('l')
-        localStorage.removeItem('r2')
-        localStorage.removeItem('typeOfMaterial')
-        localStorage.removeItem('sigmaE')
-        localStorage.removeItem('sigmaR')
-        localStorage.removeItem('tempOfWork')
-        localStorage.removeItem('surfaceFinish')
-        localStorage.removeItem('conf')
+    if (state.torque && state.l && state.r2 && state.sigmaR && state.sigmaE && state.tempOfWork
+        && state.components ) {
+        db.save(fileName,state)
         history.push('/points')
-      } else {
+    } else {
         setAtention(true)
-      }
     }
-    validate()
   }
+
   function handleHome(event) {
     event.preventDefault();
+    dispatch(actions.back())
     history.push('/')
-    localStorage.clear()
   }
   function handleSetHome(event) {
     event.preventDefault()
     setHome(true)
   }
+
   return (
     <>
       <div class="window">
@@ -248,15 +84,15 @@ export default function Page3({ history }) {
             </div>
 
             {home && (
-            <>
-            <label className='label200'>Voltar para Home? O que foi digitado  será perdido.</label>
-            <button class="btn btn-default active" onClick={(event)=>{setHome(false);handleHome(event)}}>
-              Sim
+              <>
+                <label className='label200'>Voltar para Home? O que foi digitado  será perdido.</label>
+                <button class="btn btn-default active" onClick={(event) => { setHome(false); handleHome(event) }}>
+                  Sim
             </button>
-            <button class="btn btn-default active"  onClick={()=>setHome(false)}>
-              Não
+                <button class="btn btn-default active" onClick={() => setHome(false)}>
+                  Não
             </button>
-            </>)}
+              </>)}
 
             <div class="btn-group pull-right">
               <button onClick={() => con.handleMinimize()} class="btn btn-default">
@@ -292,165 +128,76 @@ export default function Page3({ history }) {
             <div class="work">
               <form>
                 <div class="form-Edited2">
-                    <div className='intro'>
+                  <div className='intro'>
                     <span class="icon icon-record"></span>
                     <label class="label7">Engrenagens</label>
-                    <button class="btn btn-default" 
-                    onClick = {(event)=> handleMinusG(event)}  
+                    <button class="btn btn-default"
+                      onClick={(event) => handleMinusG(event)}
                     >
-                    <span class="icon icon-minus-circled"></span>
+                      <span class="icon icon-minus-circled"></span>
                     </button>
-                    
-                    <button class="btn btn-default" 
-                    onClick = {(event)=> handlePlusG(event)}
+
+                    <button class="btn btn-default"
+                      onClick={(event) => handlePlusG(event)}
                     >
-                    <span class="icon icon-plus-circled"></span>
+                      <span class="icon icon-plus-circled"></span>
                     </button>
                     <label class="label11">(Aperte para adicionar ou remover)</label>
-                    </div>
+                  </div>
+
                   <label class="label3" >Diâmetro primitivo</label>
-                            <input type="number" class="form-control3" placeholder="mm"
-                              onChange={event => setDg1(event.target.value)}
-                              value={dg1}
-                            />
-                            {numG >= 2 && (<input type="number" class="form-control3" placeholder="mm"
-                              onChange={event => setDg2(event.target.value)}
-                              value={dg2}
-                            />)}
-                            {numG >= 3 && (<input type="number" class="form-control3" placeholder="mm"
-                              onChange={event => setDg3(event.target.value)}
-                              value={dg3}
-                            />)}
-                            {numG >= 4 && (<input type="number" class="form-control3" placeholder="mm"
-                              onChange={event => setDg4(event.target.value)}
-                              value={dg4}
-                            />)}
-                            {numG >= 5 && (<input type="number" class="form-control3" placeholder="mm"
-                              onChange={event => setDg5(event.target.value)}
-                              value={dg5}
-                            />)}
-                            {numG >= 6 && (<input type="number" class="form-control3" placeholder="mm"
-                              onChange={event => setDg6(event.target.value)}
-                              value={dg6}
-                            />)}
+                  {state.components.gears.map((g,i) => (
+                    <input type="number" key={i} class="form-control3" placeholder="mm"
+                      onChange={event => dispatch(actions.setDiameterG(event.target.value,i))}
+                      value={g.d}
+                    />))}
+
                   <label class="label3" >Angulo de pressão (0 para engrenagens retas)</label>
-                            <input type="number" class="form-control3" placeholder="°"
-                              onChange={event => setPressionAngle1(event.target.value)}
-                              value={pressionAngle1}
-                            />
-                            {numG >= 2 && (<input type="number" class="form-control3" placeholder="°"
-                              onChange={event => setPressionAngle2(event.target.value)}
-                              value={pressionAngle2}
-                            />)}
-                            {numG >= 3 && (<input type="number" class="form-control3" placeholder="°"
-                              onChange={event => setPressionAngle3(event.target.value)}
-                              value={pressionAngle3}
-                            />)}
-                            {numG >= 4 && (<input type="number" class="form-control3" placeholder="°"
-                              onChange={event => setPressionAngle4(event.target.value)}
-                              value={pressionAngle4}
-                            />)}
-                            {numG >= 5 && (<input type="number" class="form-control3" placeholder="°"
-                              onChange={event => setPressionAngle5(event.target.value)}
-                              value={pressionAngle5}
-                            />)}
-                            {numG >= 6 && (<input type="number" class="form-control3" placeholder="°"
-                              onChange={event => setPressionAngle6(event.target.value)}
-                              value={pressionAngle6}
-                            />)}
+                  {state.components.gears.map((g,i) => (
+                    <input type="number" key={i} class="form-control3" placeholder="°"
+                      onChange={event =>  dispatch(actions.setPressionAngleG(event.target.value,i))}
+                      value={g.pressionAngle}
+                    />))}
+
                   <label class="label3" >Posição no eixo (em relação ao primeiro mancal)</label>
-                            <input type="number" class="form-control3" placeholder="mm"
-                              onChange={event => setPosG1(event.target.value)}
-                              value={posG1}
-                            />
-                            {numG >= 2 && (<input type="number" class="form-control3" placeholder="mm"
-                              onChange={event => setPosG2(event.target.value)}
-                              value={posG2}
-                            />)}
-                            {numG >= 3 && (<input type="number" class="form-control3" placeholder="mm"
-                              onChange={event => setPosG3(event.target.value)}
-                              value={posG3}
-                            />)}
-                            {numG >= 4 && (<input type="number" class="form-control3" placeholder="mm"
-                              onChange={event => setPosG4(event.target.value)}
-                              value={posG4}
-                            />)}
-                            {numG >= 5 && (<input type="number" class="form-control3" placeholder="mm"
-                              onChange={event => setPosG5(event.target.value)}
-                              value={posG5}
-                            />)}
-                            {numG >= 6 && (<input type="number" class="form-control3" placeholder="mm"
-                              onChange={event => setPosG6(event.target.value)}
-                              value={posG6}
-                            />)}
+                  {state.components.gears.map((g,i) => (
+                    <input type="number" key={i} class="form-control3" placeholder="mm"
+                      onChange={event =>  dispatch(actions.setPositionG(event.target.value,i))}
+                      value={g.position}
+                    />))}
+
                 </div>
                 <div class="form-Edited2">
-                    <div className='intro'>
+                  <div className='intro'>
                     <span class="icon icon-record"></span>
                     <label class="label7">Polias</label>
-                    <button class="btn btn-default" 
-                    onClick = {(event)=> handleMinusP(event)}  
+                    <button class="btn btn-default"
+                      onClick={(event) => handleMinusP(event)}
                     >
-                    <span class="icon icon-minus-circled"></span>
+                      <span class="icon icon-minus-circled"></span>
                     </button>
-                    
-                    <button class="btn btn-default" 
-                    onClick = {(event)=> handlePlusP(event)}
+
+                    <button class="btn btn-default"
+                      onClick={(event) => handlePlusP(event)}
                     >
-                    <span class="icon icon-plus-circled"></span>
+                      <span class="icon icon-plus-circled"></span>
                     </button>
                     <label class="label11">(Aperte para adicionar ou remover)</label>
-                    </div>
+                  </div>
+
                   <label class="label3" >Diâmetro primitivo</label>
-                            <input type="number" class="form-control3" placeholder="mm"
-                              onChange={event => setDp1(event.target.value)}
-                              value={dp1}
-                            />
-                            {numP >= 2 && (<input type="number" class="form-control3" placeholder="mm"
-                              onChange={event => setDp2(event.target.value)}
-                              value={dp2}
-                            />)}
-                            {numP >= 3 && (<input type="number" class="form-control3" placeholder="mm"
-                              onChange={event => setDp3(event.target.value)}
-                              value={dp3}
-                            />)}
-                            {numP >= 4 && (<input type="number" class="form-control3" placeholder="mm"
-                              onChange={event => setDp4(event.target.value)}
-                              value={dp4}
-                            />)}
-                            {numP >= 5 && (<input type="number" class="form-control3" placeholder="mm"
-                              onChange={event => setDp5(event.target.value)}
-                              value={dp5}
-                            />)}
-                            {numP >= 6 && (<input type="number" class="form-control3" placeholder="mm"
-                              onChange={event => setDp6(event.target.value)}
-                              value={dp6}
-                            />)}
+                  {state.components.pulleys.map((p,i) => (
+                  <input type="number" key={i} class="form-control3" placeholder="mm"
+                    onChange={event => dispatch(actions.setDiameterP(event.target.value,i))}
+                    value={p.d}
+                  />))}
+
                   <label class="label3" >Posição no eixo (em relação ao primeiro mancal)</label>
-                             <input type="number" class="form-control3" placeholder="mm"
-                              onChange={event => setPosP1(event.target.value)}
-                              value={posP1}
-                            />
-                            {numP >= 2 && (<input type="number" class="form-control3" placeholder="mm"
-                              onChange={event => setPosP2(event.target.value)}
-                              value={posP2}
-                            />)}
-                            {numP >= 3 && (<input type="number" class="form-control3" placeholder="mm"
-                              onChange={event => setPosP3(event.target.value)}
-                              value={posP3}
-                            />)}
-                            {numP >= 4 && (<input type="number" class="form-control3" placeholder="mm"
-                              onChange={event => setPosP4(event.target.value)}
-                              value={posP4}
-                            />)}
-                            {numP >= 5 && (<input type="number" class="form-control3" placeholder="mm"
-                              onChange={event => setPosP5(event.target.value)}
-                              value={posP5}
-                            />)}
-                           {numP >= 6 && (<input type="number" class="form-control3" placeholder="mm"
-                              onChange={event => setPosP6(event.target.value)}
-                              value={posP6}
-                            />)}
+                  {state.components.pulleys.map((p,i) => (
+                  <input type="number" key={i} class="form-control3" placeholder="mm"
+                    onChange={event => dispatch(actions.setPositionP(event.target.value,i))}
+                    value={p.position}
+                  />))}
                 </div>
                 {atention && <label class="label4" >Algumas informações estão faltando, verifique essa e as sessões anteriores.</label>}
               </form>
@@ -468,7 +215,7 @@ export default function Page3({ history }) {
               </button>
 
             <button type="submit" class="btn btn-primary pull-right"
-              onClick={handleSubmitNext}>
+              onClick={(event)=>handleSubmitNext(event)}>
               Próximo
               </button>
 
