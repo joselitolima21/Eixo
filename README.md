@@ -1,4 +1,5 @@
 # Eixo
+Programa com interface de usuáro para dimensionamento de eixos de tramissão utilizando teorias de fadiga vibrações e deflexão
 ## Execução em desenvolvimento 
 ```
 yarn start
