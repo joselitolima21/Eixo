@@ -1,4 +1,15 @@
 # Eixo
+Programa com interface de usuáro para dimensionamento de eixos de tramissão utilizando teorias de fadiga vibrações e deflexão
+## Execução em desenvolvimento 
+```
+yarn start
+```
+## Build do projeto
+```
+yarn build
+```
+Será criado uma pasta dist com o instalardor exe do programa
+## Features
 1. Fadiga
 2. Deflexão
 3. Vibração
