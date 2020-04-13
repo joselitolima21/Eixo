@@ -11,6 +11,8 @@ yarn build
 Será criado uma pasta dist com o instalardor exe do programa
 ## Screenshots
 ![](/src/images/home.png)
+![](/src/images/diametro.png)
+![](/src/images/tela3.png)
 ## Features
 1. Fadiga
 2. Deflexão
