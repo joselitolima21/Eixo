@@ -39,7 +39,7 @@
 - [x] Ver como mostrar os resultados e possiveis gráficos
 ## 2 - Deflexão
 - [ ] Obter dados
-- [ ] Calcular deflexões torcionais 
+- [ ] Calcular deflexões torcionais
 - [ ] Integrar e calcular deflexões radiais
 - [ ] Verificar se está ok
 ## 3 - Vibração
